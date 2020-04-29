@@ -1,0 +1,70 @@
+<resources>
+    <string name = "app_name">Daily Faith</string>
+    <string name = "self_love">Self Love.</string>
+    <string name = "self_care">Self Care.</string>
+    <string name = "self_growth">Self Growth.</string>
+    <string name = "get_started">Get Started</string>
+    <string name = "launch_reminder_quote">What you do today can improve all
+        your
+        tomorrows</string>
+    <string name = "ralf_marston">- Ralf Marston</string>
+    <string name = "motivation_reminder">Set daily Motivation reminders.</string>
+    <string name = "how_many">How Many</string>
+    <string name = "_10x">10X</string>
+    <string name = "start_at">Start At</string>
+    <string name = "end_at">End At</string>
+    <string name = "continue_str">Continue</string>
+    <string name = "unlock_everything">Unlock Everything.</string>
+    <string name = "trial">3days Free Trial</string>
+    <string name = "categories_str">Categories for any situation</string>
+    <string name = "themes_str">Original themes, customizable</string>
+    <string name = "ads_str">No ads, no watermarks</string>
+    <string name = "reminders_str">Full reminders to change your mindset</string>
+    <string name = "premium_str">Try premium for free.</string>
+    <string name = "offer_str">3 days free, then just ₹ 1699.00/ year</string>
+    <string name = "restore">Restore</string>
+    <string name = "privacy_policy">Privacy Policy</string>
+    <string name = "terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name = "quotes_str">Quotes you can\'t find anywhere else</string>
+    <string name = "selection_str">Select the quotes you want to see on :</string>
+    <string name = "bible_verses">Bible Verses</string>
+    <string name = "prayers">Prayers</string>
+    <string name = "category">Category</string>
+    <string name = "themes">Themes</string>
+    <string name = "reminders">Reminders</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name = "hello_blank_fragment">Hello blank fragment</string>
+    <string name = "categories">Categories</string>
+    <string name = "daily_reminders">Daily Reminders</string>
+    <string name = "type_of_quotes">Type of quotes</string>
+    <string name = "motivation">Motivation</string>
+    <string name = "collections">Collections</string>
+    <string name = "search">Search</string>
+    <string name = "past_quotes">Past Quotes</string>
+    <string name = "about_us">ABOUT US</string>
+    <string name = "share_with_a_friend">Share with a friend</string>
+    <string name = "follow_us_on_instagram">Follow us on Instagram</string>
+    <string name = "leave_us_a_review">Leave us a Review</string>
+    <string name = "help">Help</string>
+    <string name = "give_us_a_feedback">Give us a Feedback</string>
+    <string name = "more">More</string>
+    <string name = "image_save">Image Save</string>
+    <string name = "instagram">Instagram</string>
+    <string name = "copy_text">Copy Text</string>
+    <string name = "message">Message</string>
+
+    <string name = "no_collections">You Don\'t have any collections Yet.</string>
+    <string name = "collections_desc">Collections group quotes you save together. Like \'quote that you cheer me up\' or \'stop procastinating\'.</string>
+    <string name = "create_collection">Create Collection</string>
+    <string name = "reminder_msg">Setting daily reminders will help you stay motivated and think positive</string>
+    <string name = "swipe_instruction">Swipe to read quotes</string>
+    <string name = "got_it">Got it!</string>
+    <string name = "favourites">Favourites</string>
+    <string name = "add_a_new_quote">Add a new Quote</string>
+    <string name = "quote_2"><![CDATA[Write & share your own thoughts. These will only be visible to you.]]></string>
+    <string name = "quote_string">Quote</string>
+    <string name = "author_optional">Author(Optional)</string>
+    <string name = "save">Save</string>
+    <string name = "cancel">Cancel</string>
+</resources>

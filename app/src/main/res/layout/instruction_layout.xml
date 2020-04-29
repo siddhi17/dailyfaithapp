@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                                                   xmlns:app = "http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width = "match_parent"
+                                                   android:layout_height = "match_parent"
+                                                   android:background = "@drawable/layout_background">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:padding = "@dimen/margin_20"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toTopOf = "parent">
+
+        <ImageView
+            android:id = "@+id/imageView_swipe_hand"
+            android:layout_width = "70dp"
+            android:layout_height = "70dp"
+            android:layout_marginTop = "@dimen/margin_20"
+            android:src = "@drawable/ic_swipe_hand"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent" />
+
+        <TextView
+            android:id = "@+id/textView_swipe"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginTop = "@dimen/margin_30"
+            android:fontFamily = "@font/open_sans_bold"
+            android:text = "@string/swipe_instruction"
+            android:textColor = "@android:color/black"
+            android:textSize = "@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/imageView_swipe_hand" />
+
+        <Button
+            android:id = "@+id/button_got_it"
+            style = "?android:attr/borderlessButtonStyle"
+            android:layout_width = "@dimen/margin_240"
+            android:layout_height = "@dimen/margin_40"
+            android:layout_centerHorizontal = "true"
+            android:layout_marginTop = "@dimen/margin_20"
+            android:background = "@drawable/button_background"
+            android:fontFamily = "@font/open_sans_semibold"
+            android:text = "@string/got_it"
+            android:textAllCaps = "false"
+            android:textColor = "@android:color/black"
+            android:textSize = "@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintHorizontal_bias = "0.497"
+            app:layout_constraintLeft_toLeftOf = "parent"
+            app:layout_constraintRight_toRightOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@+id/textView_swipe" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

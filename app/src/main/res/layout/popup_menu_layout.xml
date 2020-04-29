@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                                                   xmlns:app = "http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width = "wrap_content"
+                                                   android:layout_height = "wrap_content"
+                                                   android:alpha = "0.95"
+                                                   android:background = "@drawable/pop_up_bg">
+
+    <RelativeLayout
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:layout_marginBottom = "@dimen/margin_20"
+        android:paddingLeft = "@dimen/margin_5"
+        android:paddingTop = "@dimen/margin_10"
+        android:paddingRight = "@dimen/margin_5"
+        android:paddingBottom = "@dimen/margin_10"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toTopOf = "parent">
+
+        <RelativeLayout
+            android:id = "@+id/relative_msg"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent">
+
+            <ImageView
+                android:id = "@+id/imageView_message"
+                android:layout_width = "@dimen/margin_34"
+                android:layout_height = "@dimen/margin_34"
+                android:src = "@drawable/ic_message">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "@dimen/margin_5"
+                android:layout_marginLeft = "@dimen/margin_5"
+                android:layout_toEndOf = "@id/imageView_message"
+                android:layout_toRightOf = "@id/imageView_message"
+                android:text = "@string/message"
+                android:textColor = "@android:color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id = "@+id/relative_copy_text"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_below = "@id/relative_msg"
+            android:layout_marginTop = "@dimen/margin_5"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/relative_msg">
+
+            <ImageView
+                android:id = "@+id/imageView_copy_text"
+                android:layout_width = "@dimen/margin_30"
+                android:layout_height = "@dimen/margin_30"
+                android:src = "@drawable/ic_copy_text">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "@dimen/margin_5"
+                android:layout_marginLeft = "@dimen/margin_5"
+                android:layout_toEndOf = "@id/imageView_copy_text"
+                android:layout_toRightOf = "@id/imageView_copy_text"
+                android:text = "@string/copy_text"
+                android:textColor = "@android:color/black" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id = "@+id/relative_instagram"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_below = "@id/relative_copy_text"
+            android:layout_marginTop = "@dimen/margin_5"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/relative_copy_text">
+
+            <ImageView
+                android:id = "@+id/imageView_instagram"
+                android:layout_width = "@dimen/margin_30"
+                android:layout_height = "@dimen/margin_30"
+                android:src = "@drawable/ic_instagram_share">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "@dimen/margin_5"
+                android:layout_marginLeft = "@dimen/margin_5"
+                android:layout_toEndOf = "@id/imageView_instagram"
+                android:layout_toRightOf = "@id/imageView_instagram"
+                android:text = "@string/instagram"
+                android:textColor = "@android:color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id = "@+id/relative_image_save"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_below = "@id/relative_instagram"
+            android:layout_marginTop = "@dimen/margin_5"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/relative_instagram">
+
+            <ImageView
+                android:id = "@+id/imageView_image_save"
+                android:layout_width = "@dimen/margin_32"
+                android:layout_height = "@dimen/margin_32"
+                android:src = "@drawable/ic_image_save">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "@dimen/margin_5"
+                android:layout_marginLeft = "@dimen/margin_5"
+                android:layout_toEndOf = "@id/imageView_image_save"
+                android:layout_toRightOf = "@id/imageView_image_save"
+                android:text = "@string/image_save"
+                android:textColor = "@android:color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id = "@+id/relative_more"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_below = "@id/relative_image_save"
+            android:layout_marginTop = "@dimen/margin_5"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/relative_image_save">
+
+            <ImageView
+                android:id = "@+id/imageView_more"
+                android:layout_width = "@dimen/margin_30"
+                android:layout_height = "@dimen/margin_30"
+                android:src = "@drawable/ic_more_popup" />
+
+
+            <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "@dimen/margin_5"
+                android:layout_marginLeft = "@dimen/margin_5"
+                android:layout_toEndOf = "@id/imageView_more"
+                android:layout_toRightOf = "@id/imageView_more"
+                android:text = "@string/more"
+                android:textColor = "@android:color/black" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

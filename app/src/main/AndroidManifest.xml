@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android = "http://schemas.android.com/apk/res/android"
+          package = "com.example.dailyfaithapp">
+
+    <uses-permission android:name = "android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup = "true"
+        android:icon = "@drawable/ic_daily_faith_icon"
+        android:label = "@string/app_name"
+        android:roundIcon = "@drawable/ic_daily_faith_icon"
+        android:supportsRtl = "true"
+        android:theme = "@style/AppTheme">
+        <activity android:name = ".Activities.ThemesActivity"></activity>
+        <activity android:name = ".Activities.FavouritesActivity" />
+        <activity android:name = ".Activities.PastQuotesActivity" />
+        <activity
+            android:name = ".Activities.CollectionsActivity"
+            android:windowSoftInputMode = "adjustResize" />
+        <activity android:name = ".Activities.MotivationActivity" />
+        <activity android:name = ".Activities.RemindersActivity" />
+        <activity android:name = ".Activities.CategoryActivity" />
+        <activity android:name = ".Activities.SelectionActivity" />
+        <activity android:name = ".Activities.UnlockActivity" />
+        <activity android:name = ".Activities.LaunchReminderActivity" />
+        <activity android:name = ".Activities.SplashActivity" />
+        <activity android:name = ".Activities.MainActivity">
+            <intent-filter>
+                <action android:name = "android.intent.action.MAIN" />
+
+                <category android:name = "android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name = "preloaded_fonts"
+            android:resource = "@array/preloaded_fonts" />
+    </application>
+
+</manifest>

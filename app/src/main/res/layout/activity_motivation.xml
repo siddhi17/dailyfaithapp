@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                                                   xmlns:app = "http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools = "http://schemas.android.com/tools"
+                                                   android:layout_width = "match_parent"
+                                                   android:layout_height = "match_parent"
+                                                   tools:context = ".Activities.MotivationActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id = "@+id/toolbar"
+        android:layout_width = "0dp"
+        android:layout_height = "wrap_content"
+        android:background = "@color/colorBackground"
+        app:layout_constraintLeft_toLeftOf = "parent"
+        app:layout_constraintRight_toRightOf = "parent"
+        app:layout_constraintTop_toTopOf = "parent">
+
+        <RelativeLayout
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content">
+
+            <ImageView
+                android:id = "@+id/imageView_motivation_back"
+                android:layout_width = "@dimen/margin_26"
+                android:layout_height = "@dimen/margin_26"
+                android:layout_centerVertical = "true"
+                android:src = "@drawable/ic_back_arrow" />
+
+            <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_marginStart = "@dimen/margin_10"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_toEndOf = "@id/imageView_motivation_back"
+                android:layout_toRightOf = "@id/imageView_motivation_back"
+                android:fontFamily = "@font/open_sans_bold"
+                android:gravity = "center"
+                android:text = "@string/motivation"
+                android:textAlignment = "center"
+                android:textColor = "@android:color/black"
+                android:textSize = "@dimen/text_size_24" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:id = "@+id/scroll_view"
+        android:layout_width = "match_parent"
+        android:layout_height = "0dp"
+        android:background = "@color/colorBackground"
+        app:layout_constraintBottom_toTopOf = "@id/include"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toBottomOf = "@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "0dp"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent">
+
+            <RelativeLayout
+                android:id = "@+id/relative_collections"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginTop = "10dp"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toTopOf = "parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_collections"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:paddingTop = "@dimen/margin_8"
+                    android:paddingRight = "@dimen/margin_2"
+                    android:paddingBottom = "@dimen/margin_3"
+                    android:src = "@drawable/ic_collections" />
+
+                <TextView
+                    android:id = "@+id/textView_collections"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_collections"
+                    android:layout_toRightOf = "@id/imageView_collections"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/collections"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_18" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_collections"
+                    android:layout_alignLeft = "@+id/textView_collections"
+                    android:layout_alignEnd = "@+id/imageView_arrow"
+                    android:layout_alignRight = "@+id/imageView_arrow"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id = "@+id/relative_search"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toBottomOf = "@id/relative_collections">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_search"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:paddingTop = "@dimen/margin_8"
+                    android:src = "@drawable/ic_search" />
+
+                <TextView
+                    android:id = "@+id/textView_search"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_search"
+                    android:layout_toRightOf = "@id/imageView_search"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/search"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_18" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow1"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_search"
+                    android:layout_alignLeft = "@+id/textView_search"
+                    android:layout_alignEnd = "@+id/imageView_search"
+                    android:layout_alignRight = "@+id/imageView_search"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id = "@+id/relative_past_quotes"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toBottomOf = "@id/relative_search">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_past_quotes"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:paddingLeft = "@dimen/margin_3"
+                    android:paddingTop = "@dimen/margin_5"
+                    android:paddingRight = "@dimen/margin_3"
+                    android:src = "@drawable/ic_past_quotes" />
+
+                <TextView
+                    android:id = "@+id/textView_past_quotes"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_past_quotes"
+                    android:layout_toRightOf = "@id/imageView_past_quotes"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/past_quotes"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_16" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow2"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_past_quotes"
+                    android:layout_alignLeft = "@+id/textView_past_quotes"
+                    android:layout_alignEnd = "@+id/imageView_past_quotes"
+                    android:layout_alignRight = "@+id/imageView_past_quotes"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id = "@+id/relative_favourites"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toBottomOf = "@id/relative_past_quotes">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_favourites"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:paddingTop = "@dimen/margin_8"
+                    android:src = "@drawable/ic_favourites" />
+
+                <TextView
+                    android:id = "@+id/textView_favourites"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_favourites"
+                    android:layout_toRightOf = "@id/imageView_favourites"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/favourites"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_16" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow3"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_favourites"
+                    android:layout_alignLeft = "@+id/textView_favourites"
+                    android:layout_alignEnd = "@+id/imageView_favourites"
+                    android:layout_alignRight = "@+id/imageView_favourites"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id = "@+id/textView_about_us"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginStart = "@dimen/margin_20"
+                android:layout_marginLeft = "@dimen/margin_20"
+                android:background = "@color/colorBackground"
+                android:fontFamily = "@font/open_sans_semibold"
+                android:padding = "@dimen/margin_10"
+                android:text = "@string/about_us"
+                android:textColor = "@android:color/black"
+                android:textSize = "@dimen/text_size24"
+                app:layout_constraintTop_toBottomOf = "@id/relative_favourites" />
+
+            <RelativeLayout
+                android:id = "@+id/relative_share"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toBottomOf = "@id/textView_about_us">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_share"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:paddingStart = "@dimen/margin_5"
+                    android:paddingLeft = "@dimen/margin_5"
+                    android:paddingEnd = "@dimen/margin_8"
+                    android:paddingRight = "@dimen/margin_8"
+                    android:src = "@drawable/ic_share_with_friend" />
+
+                <TextView
+                    android:id = "@+id/textView_share"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_share"
+                    android:layout_toRightOf = "@id/imageView_share"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/share_with_a_friend"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_16" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow4"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_share"
+                    android:layout_alignLeft = "@+id/textView_share"
+                    android:layout_alignEnd = "@+id/imageView_share"
+                    android:layout_alignRight = "@+id/imageView_share"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id = "@+id/relative_follow_insta"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toBottomOf = "@id/relative_share">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_follow_insta"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:padding = "@dimen/margin_10"
+                    android:src = "@drawable/ic_instagram" />
+
+                <TextView
+                    android:id = "@+id/textView_follow_insta"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_follow_insta"
+                    android:layout_toRightOf = "@id/imageView_follow_insta"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/follow_us_on_instagram"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_16" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow5"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_follow_insta"
+                    android:layout_alignLeft = "@+id/textView_follow_insta"
+                    android:layout_alignEnd = "@+id/imageView_follow_insta"
+                    android:layout_alignRight = "@+id/imageView_follow_insta"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id = "@+id/relative_review"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toBottomOf = "@id/relative_follow_insta">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_review"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:padding = "@dimen/margin_3"
+                    android:src = "@drawable/ic_review" />
+
+                <TextView
+                    android:id = "@+id/textView_review"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_review"
+                    android:layout_toRightOf = "@id/imageView_review"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/leave_us_a_review"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_16" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow6"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_review"
+                    android:layout_alignLeft = "@+id/textView_review"
+                    android:layout_alignEnd = "@+id/imageView_review"
+                    android:layout_alignRight = "@+id/imageView_review"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id = "@+id/relative_help"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toBottomOf = "@id/relative_review">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_help"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:padding = "@dimen/margin_5"
+                    android:src = "@drawable/ic_help" />
+
+                <TextView
+                    android:id = "@+id/textView_help"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_help"
+                    android:layout_toRightOf = "@id/imageView_help"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/help"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_16" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow7"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_help"
+                    android:layout_alignLeft = "@+id/textView_help"
+                    android:layout_alignEnd = "@+id/imageView_help"
+                    android:layout_alignRight = "@+id/imageView_help"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id = "@+id/relative_feedback"
+                android:layout_width = "match_parent"
+                android:layout_height = "@dimen/margin_60"
+                android:layout_marginLeft = "@dimen/margin_10"
+                android:layout_marginRight = "@dimen/margin_10"
+                android:background = "@color/colorBackground"
+                app:layout_constraintEnd_toEndOf = "parent"
+                app:layout_constraintStart_toStartOf = "parent"
+                app:layout_constraintTop_toBottomOf = "@id/relative_help">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_feedback"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:background = "@drawable/circle_motivation_icon"
+                    android:padding = "@dimen/margin_5"
+                    android:src = "@drawable/ic_feedback" />
+
+                <TextView
+                    android:id = "@+id/textView_feedback"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginStart = "@dimen/margin_20"
+                    android:layout_marginLeft = "@dimen/margin_20"
+                    android:layout_toEndOf = "@id/imageView_feedback"
+                    android:layout_toRightOf = "@id/imageView_feedback"
+                    android:fontFamily = "@font/open_sans_semibold"
+                    android:text = "@string/give_us_a_feedback"
+                    android:textColor = "@android:color/black"
+                    android:textSize = "@dimen/text_size_16" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow8"
+                    android:layout_width = "@dimen/margin_20"
+                    android:layout_height = "@dimen/margin_20"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/ic_next" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_alignStart = "@+id/textView_feedback"
+                    android:layout_alignLeft = "@+id/textView_feedback"
+                    android:layout_alignEnd = "@+id/imageView_feedback"
+                    android:layout_alignRight = "@+id/imageView_feedback"
+                    android:layout_alignParentBottom = "true"
+                    android:background = "@color/light_white" />
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <include
+        android:id = "@+id/include"
+        layout = "@layout/main_bottom_layout"
+        android:layout_width = "wrap_content"
+        android:layout_height = "@dimen/margin_80"
+        android:layout_marginBottom = "@dimen/margin_10"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name = "colorPrimary">#f7faff</color>
+    <color name = "colorPrimaryDark">#f7faff</color>
+    <color name = "colorAccent">#bbf2ff</color>
+
+    <color name = "colorBackground">#f7faff</color>
+
+    <color name = "grey_shade">#FDFEFF</color>
+    <color name = "dark_grey">#595959</color>
+    <color name = "white_shade">#f7f7f7</color>
+
+    <color name = "category_bottom">#fdfeff</color>
+    <color name = "divider_grey">#EAE7E7</color>
+
+    <color name = "transparent">#00FF0000</color>
+    <color name = "white">#FFFFFF</color>
+
+    <!--Category colors-->
+
+    <color name = "Anxiety">#A2EFFF</color>
+    <color name = "Courage">#A2FFCE</color>
+    <color name = "Depression">#A0EBFB</color>
+    <color name = "Doubt">#A0FBCB</color>
+    <color name = "Encouragement">#9CE6F6</color>
+    <color name = "Faith">#9DF6C7</color>
+    <color name = "Fear">#99E1F1</color>
+    <color name = "Forgiveness">#98EEC1</color>
+    <color name = "Grace">#96DCEC</color>
+    <color name = "Gratitude">#95E9BD</color>
+    <color name = "Guidance">#93D7E7</color>
+    <color name = "HealthHealing">#90E2B7</color>
+    <color name = "Hope">#90D2E2</color>
+    <color name = "Inspiration">#8DDDB3</color>
+    <color name = "Kids">#8DCDDD</color>
+    <color name = "Marriage">#89D7AF</color>
+    <color name = "Mercy">#89C8D7</color>
+    <color name = "Patience">#86D2AB</color>
+    <color name = "Peace">#86C4D2</color>
+    <color name = "Relationships">#81CBA5</color>
+    <color name = "Salvation">#81BDCB</color>
+    <color name = "Strength">#81CBA5</color>
+    <color name = "Trust">#7EB8C6</color>
+    <color name = "Worry">#7EC6A1</color>
+    <color name = "light_white">#ecf3ff</color>
+    <color name = "light_grey">#f2f1f6</color>
+
+</resources>

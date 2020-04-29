@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                                                   xmlns:app = "http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools = "http://schemas.android.com/tools"
+                                                   android:layout_width = "match_parent"
+                                                   android:layout_height = "match_parent"
+                                                   android:background = "@color/colorBackground"
+                                                   tools:context = ".Activities.SelectionActivity">
+
+    <TextView
+        android:id = "@+id/textView7"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:fontFamily = "@font/open_sans"
+        android:text = "@string/selection_str"
+        android:textColor = "@android:color/black"
+        android:textSize = "@dimen/text_size_18"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintLeft_toLeftOf = "parent"
+        app:layout_constraintRight_toRightOf = "parent"
+        app:layout_constraintTop_toTopOf = "parent"
+        app:layout_constraintVertical_bias = "0.414" />
+
+    <RelativeLayout
+        android:id = "@+id/relative_bible_verses"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginLeft = "@dimen/margin_20"
+        android:layout_marginTop = "40dp"
+        android:layout_marginRight = "@dimen/margin_20"
+        android:background = "@drawable/layout_background"
+        app:layout_constraintStart_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toBottomOf = "@id/textView7">
+
+
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_alignParentRight = "true"
+            android:layout_centerVertical = "true"
+            android:layout_marginStart = "40dp"
+            android:layout_marginLeft = "40dp"
+            android:layout_marginTop = "@dimen/margin_20"
+            android:layout_marginEnd = "40dp"
+            android:layout_marginRight = "40dp"
+            android:layout_marginBottom = "@dimen/margin_20"
+            android:layout_toEndOf = "@+id/textView_start_at"
+            android:layout_toRightOf = "@+id/textView_start_at"
+            android:background = "@drawable/layout_border"
+            android:paddingLeft = "10dp"
+            android:paddingRight = "10dp"
+            android:paddingBottom = "@dimen/margin_5">
+
+            <TextView
+                android:id = "@+id/textView_bible_verses"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerInParent = "true"
+                android:fontFamily = "@font/open_sans"
+                android:gravity = "center_horizontal"
+                android:text = "@string/bible_verses"
+                android:textAlignment = "center"
+                android:textColor = "@android:color/black"
+                android:textSize = "16sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id = "@+id/relative_prayers"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginLeft = "@dimen/margin_20"
+        android:layout_marginTop = "@dimen/margin_20"
+        android:layout_marginRight = "@dimen/margin_20"
+        android:background = "@drawable/layout_background"
+        app:layout_constraintStart_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toBottomOf = "@id/relative_bible_verses">
+
+
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_alignParentRight = "true"
+            android:layout_centerVertical = "true"
+            android:layout_marginStart = "40dp"
+            android:layout_marginLeft = "40dp"
+            android:layout_marginTop = "@dimen/margin_20"
+            android:layout_marginEnd = "40dp"
+            android:layout_marginRight = "40dp"
+            android:layout_marginBottom = "@dimen/margin_20"
+            android:layout_toEndOf = "@+id/textView_start_at"
+            android:layout_toRightOf = "@+id/textView_start_at"
+            android:background = "@drawable/layout_border"
+            android:paddingLeft = "10dp"
+            android:paddingRight = "10dp"
+            android:paddingBottom = "@dimen/margin_5">
+
+            <TextView
+                android:id = "@+id/textView_prayers"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerInParent = "true"
+                android:fontFamily = "@font/open_sans"
+                android:gravity = "center_horizontal"
+                android:text = "@string/prayers"
+                android:textAlignment = "center"
+                android:textColor = "@android:color/black"
+                android:textSize = "16sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:id = "@+id/button"
+        style = "?android:attr/borderlessButtonStyle"
+        android:layout_width = "350dp"
+        android:layout_height = "40dp"
+        android:layout_centerHorizontal = "true"
+        android:layout_marginTop = "60dp"
+        android:background = "@drawable/button_background"
+        android:fontFamily = "@font/open_sans_semibold"
+        android:text = "@string/continue_str"
+        android:textAllCaps = "false"
+        android:textColor = "@android:color/black"
+        android:textSize = "@dimen/text_size_14"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintHorizontal_bias = "0.497"
+        app:layout_constraintLeft_toLeftOf = "parent"
+        app:layout_constraintRight_toRightOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toBottomOf = "@+id/relative_prayers" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

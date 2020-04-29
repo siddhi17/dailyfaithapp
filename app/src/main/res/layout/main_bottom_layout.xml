@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android = "http://schemas.android.com/apk/res/android"
+                                   xmlns:app = "http://schemas.android.com/apk/res-auto"
+                                   android:id = "@+id/constraintBottom"
+                                   android:layout_width = "match_parent"
+                                   android:layout_height = "@dimen/margin_80"
+                                   android:layout_marginLeft = "@dimen/margin_20"
+                                   android:layout_marginRight = "@dimen/margin_20"
+                                   android:alpha = "0.95"
+                                   android:background = "@color/grey_shade"
+                                   app:cardCornerRadius = "@dimen/margin_20"
+                                   app:cardElevation = "@dimen/margin_5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toTopOf = "parent">
+
+        <RelativeLayout
+            android:id = "@+id/relative_category"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginStart = "@dimen/margin_20"
+            android:layout_marginLeft = "@dimen/margin_20"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintBottom_toBottomOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent">
+
+            <ImageView
+                android:id = "@+id/imageView_category"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerHorizontal = "true"
+                android:src = "@drawable/ic_category" />
+
+            <TextView
+                android:id = "@+id/textView10"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_below = "@id/imageView_category"
+                android:layout_marginTop = "@dimen/margin_5"
+                android:fontFamily = "@font/open_sans_semibold"
+                android:text = "@string/category"
+                android:textColor = "@android:color/black"
+                android:textSize = "16sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id = "@+id/relative_themes"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginStart = "@dimen/margin_20"
+            android:layout_marginLeft = "@dimen/margin_20"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintBottom_toBottomOf = "parent"
+            app:layout_constraintStart_toEndOf = "@id/relative_category"
+            app:layout_constraintTop_toTopOf = "parent">
+
+            <ImageView
+                android:id = "@+id/imageView_themes"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerHorizontal = "true"
+                android:src = "@drawable/ic_themes" />
+
+            <TextView
+                android:id = "@+id/textView9"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_below = "@id/imageView_themes"
+                android:layout_marginTop = "@dimen/margin_5"
+                android:fontFamily = "@font/open_sans_semibold"
+                android:text = "@string/themes"
+                android:textColor = "@android:color/black"
+                android:textSize = "16sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id = "@+id/relative_reminders"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginStart = "@dimen/margin_20"
+            android:layout_marginLeft = "@dimen/margin_20"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintBottom_toBottomOf = "parent"
+            app:layout_constraintStart_toEndOf = "@id/relative_themes"
+            app:layout_constraintTop_toTopOf = "parent">
+
+            <ImageView
+                android:id = "@+id/imageView_reminders"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerHorizontal = "true"
+                android:src = "@drawable/ic_reminder" />
+
+            <TextView
+                android:id = "@+id/textView8"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_below = "@id/imageView_reminders"
+                android:layout_marginTop = "@dimen/margin_5"
+                android:fontFamily = "@font/open_sans_semibold"
+                android:text = "@string/reminders"
+                android:textColor = "@android:color/black"
+                android:textSize = "16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id = "@+id/relative_more"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginStart = "@dimen/margin_20"
+            android:layout_marginLeft = "@dimen/margin_20"
+            android:layout_marginEnd = "@dimen/margin_20"
+            android:layout_marginRight = "@dimen/margin_20"
+            android:padding = "@dimen/margin_5"
+            app:layout_constraintBottom_toBottomOf = "parent"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toEndOf = "@id/relative_reminders"
+            app:layout_constraintTop_toTopOf = "parent">
+
+            <ImageView
+                android:id = "@+id/imageView_more"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerHorizontal = "true"
+                android:src = "@drawable/ic_more" />
+
+            <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_below = "@id/imageView_more"
+                android:layout_marginTop = "@dimen/margin_5"
+                android:fontFamily = "@font/open_sans_semibold"
+                android:text = "@string/more"
+                android:textColor = "@android:color/black"
+                android:textSize = "16sp" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

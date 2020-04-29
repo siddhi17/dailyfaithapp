@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                                                   xmlns:app = "http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools = "http://schemas.android.com/tools"
+                                                   android:layout_width = "match_parent"
+                                                   android:layout_height = "match_parent"
+                                                   android:background = "@color/colorBackground"
+                                                   tools:context = ".Activities.LaunchReminderActivity">
+
+
+    <TextView
+        android:id = "@+id/textView4"
+        android:layout_width = "200dp"
+        android:layout_height = "wrap_content"
+        android:layout_marginBottom = "@dimen/margin_8"
+        android:fontFamily = "@font/open_sans"
+        android:gravity = "center_horizontal"
+        android:text = "@string/launch_reminder_quote"
+        android:textAlignment = "center"
+        android:textColor = "@android:color/black"
+        android:textSize = "20sp"
+        app:layout_constraintBottom_toTopOf = "@id/textView5"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent" />
+
+    <TextView
+        android:id = "@+id/textView5"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:layout_marginBottom = "@dimen/margin_80"
+        android:fontFamily = "@font/open_sans_light"
+        android:text = "@string/ralf_marston"
+        android:textColor = "@color/dark_grey"
+        android:textSize = "16sp"
+        app:layout_constraintBottom_toTopOf = "@id/container"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id = "@+id/container"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginLeft = "@dimen/margin_20"
+        android:layout_marginRight = "@dimen/margin_20"
+        android:layout_marginBottom = "60dp"
+        android:visibility = "visible"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent">
+
+        <TextView
+            android:id = "@+id/textView6"
+            android:layout_width = "wrap_content"
+            android:layout_height = "21dp"
+            android:layout_marginTop = "4dp"
+            android:fontFamily = "@font/open_sans"
+            android:text = "@string/motivation_reminder"
+            android:textColor = "@android:color/black"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent" />
+
+        <RelativeLayout
+            android:id = "@+id/relative_count"
+            android:layout_width = "match_parent"
+            android:layout_height = "55dp"
+            android:layout_marginTop = "15dp"
+            android:background = "@drawable/layout_background"
+            app:layout_constraintStart_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@+id/textView6"
+            tools:layout_editor_absoluteX = "0dp">
+
+            <TextView
+                android:id = "@+id/textView_how_many"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "@dimen/margin_20"
+                android:layout_marginLeft = "@dimen/margin_20"
+                android:fontFamily = "@font/open_sans_semibold"
+                android:text = "@string/how_many"
+                android:textColor = "@android:color/black"
+                android:textSize = "@dimen/text_size_14" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id = "@+id/imageView_minus"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "102dp"
+                android:layout_marginLeft = "102dp"
+                android:layout_toEndOf = "@id/textView_how_many"
+                android:layout_toRightOf = "@id/textView_how_many"
+                android:background = "@drawable/layout_border"
+                android:src = "@drawable/ic_quote" />
+
+            <TextView
+                android:id = "@+id/textView_count"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "40dp"
+                android:layout_marginLeft = "40dp"
+                android:layout_toEndOf = "@id/imageView_minus"
+                android:layout_toRightOf = "@id/imageView_minus"
+                android:fontFamily = "@font/open_sans"
+                android:text = "@string/_10x"
+                android:textColor = "@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id = "@+id/imageView_plus"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "40dp"
+                android:layout_marginLeft = "40dp"
+                android:layout_toEndOf = "@id/textView_count"
+                android:layout_toRightOf = "@id/textView_count"
+                android:background = "@drawable/layout_border"
+                android:src = "@drawable/ic_plus" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id = "@+id/relative_start"
+            android:layout_width = "match_parent"
+            android:layout_height = "55dp"
+            android:layout_marginTop = "@dimen/margin_20"
+            android:background = "@drawable/layout_background"
+            app:layout_constraintStart_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/relative_count">
+
+            <TextView
+                android:id = "@+id/textView_start_at"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "@dimen/margin_20"
+                android:layout_marginLeft = "@dimen/margin_20"
+                android:fontFamily = "@font/open_sans_semibold"
+                android:text = "@string/start_at"
+                android:textColor = "@android:color/black"
+                android:textSize = "@dimen/text_size_14" />
+
+            <RelativeLayout
+                android:layout_width = "181dp"
+                android:layout_height = "wrap_content"
+                android:layout_alignParentRight = "true"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "124dp"
+                android:layout_marginLeft = "124dp"
+                android:layout_marginEnd = "16dp"
+                android:layout_marginRight = "16dp"
+                android:layout_toEndOf = "@+id/textView_start_at"
+                android:layout_toRightOf = "@+id/textView_start_at"
+                android:background = "@drawable/layout_border"
+                android:paddingLeft = "10dp"
+                android:paddingTop = "@dimen/margin_5"
+                android:paddingRight = "10dp"
+                android:paddingBottom = "10dp">
+
+                <TextView
+                    android:id = "@+id/textView_start_time"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:fontFamily = "@font/open_sans"
+                    android:gravity = "center_horizontal"
+                    android:text = "09:00"
+                    android:textAlignment = "center"
+                    android:textColor = "@android:color/black" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id = "@+id/relative_end"
+            android:layout_width = "match_parent"
+            android:layout_height = "55dp"
+            android:layout_marginTop = "10dp"
+            android:background = "@drawable/layout_background"
+            app:layout_constraintStart_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/relative_start">
+
+            <TextView
+                android:id = "@+id/textView_end_at"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "@dimen/margin_20"
+                android:layout_marginLeft = "@dimen/margin_20"
+                android:fontFamily = "@font/open_sans_semibold"
+                android:text = "@string/end_at"
+                android:textColor = "@android:color/black"
+                android:textSize = "@dimen/text_size_14" />
+
+            <RelativeLayout
+                android:layout_width = "181dp"
+                android:layout_height = "wrap_content"
+                android:layout_alignParentRight = "true"
+                android:layout_centerVertical = "true"
+                android:layout_marginStart = "130dp"
+                android:layout_marginLeft = "130dp"
+                android:layout_marginEnd = "16dp"
+                android:layout_marginRight = "16dp"
+                android:layout_toEndOf = "@+id/textView_end_at"
+                android:layout_toRightOf = "@+id/textView_end_at"
+                android:background = "@drawable/layout_border"
+                android:paddingLeft = "10dp"
+                android:paddingTop = "@dimen/margin_5"
+                android:paddingRight = "10dp"
+                android:paddingBottom = "10dp">
+
+                <TextView
+                    android:id = "@+id/textView_end_time"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:fontFamily = "@font/open_sans"
+                    android:gravity = "center_horizontal"
+                    android:text = "22:00"
+                    android:textAlignment = "center"
+                    android:textColor = "@android:color/black" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id = "@+id/button"
+            style = "?android:attr/borderlessButtonStyle"
+            android:layout_width = "350dp"
+            android:layout_height = "40dp"
+            android:layout_marginTop = "30dp"
+            android:background = "@drawable/button_background"
+            android:fontFamily = "@font/open_sans_semibold"
+            android:text = "@string/continue_str"
+            android:textAllCaps = "false"
+            android:textColor = "@android:color/black"
+            android:textSize = "@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/relative_end" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
