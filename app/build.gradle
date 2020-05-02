@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.dailyfaithapp"
+        applicationId "com.dailyfaithapp.dailyfaith"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -17,7 +17,7 @@ android {
                                      "$projectDir/schemas".toString()]
             }
         }
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -32,11 +32,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    // used by Room, to test migrations
-    sourceSets {
-        androidTest.assets.srcDirs +=
-                files("$projectDir/schemas".toString())
-    }
 
 }
 
@@ -57,6 +52,9 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation "com.github.skydoves:balloon:1.1.5"
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.android.support:multidex:1.0.3'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
     implementation "androidx.room:room-runtime:$room_version"
@@ -65,3 +63,4 @@ dependencies {
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 }
+apply plugin: 'com.google.gms.google-services'

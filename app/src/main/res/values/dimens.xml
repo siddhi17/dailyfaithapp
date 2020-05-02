@@ -30,4 +30,6 @@
     <dimen name = "text_size_24">24sp</dimen>
     <dimen name = "margin_100">100dp</dimen>
     <dimen name = "text_size_12">12sp</dimen>
+    <dimen name = "margin_24">24dp</dimen>
+    <dimen name = "text_size26">26sp</dimen>
 </resources>

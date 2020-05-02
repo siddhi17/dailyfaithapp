@@ -17,24 +17,9 @@
         android:layout_marginRight = "@dimen/margin_30"
         android:fontFamily = "@font/open_sans_bold"
         android:text = "TextView"
-        android:textSize = "@dimen/text_size_14"
         android:textColor = "@android:color/black"
+        android:textSize = "@dimen/text_size_14"
         app:layout_constraintStart_toStartOf = "parent"
         app:layout_constraintTop_toTopOf = "parent" />
 
-    <TextView
-        android:id = "@+id/textView_quote_count"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        android:layout_marginStart = "@dimen/margin_30"
-        android:layout_marginLeft = "@dimen/margin_30"
-        android:layout_marginTop = "@dimen/margin_5"
-        android:layout_marginEnd = "@dimen/margin_30"
-        android:layout_marginRight = "@dimen/margin_30"
-        android:fontFamily = "@font/open_sans_light"
-        android:text = "TextView"
-        android:textColor = "@android:color/black"
-        android:textSize = "@dimen/text_size_12"
-        app:layout_constraintStart_toStartOf = "parent"
-        app:layout_constraintTop_toBottomOf = "@+id/textView_quote" />
 </androidx.constraintlayout.widget.ConstraintLayout>

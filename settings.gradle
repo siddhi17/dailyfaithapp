@@ -1,2 +1,2 @@
-rootProject.name='DailyFaithApp'
+rootProject.name='dailyfaith'
 include ':app'

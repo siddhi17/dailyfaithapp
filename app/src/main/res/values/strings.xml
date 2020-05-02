@@ -67,4 +67,9 @@
     <string name = "author_optional">Author(Optional)</string>
     <string name = "save">Save</string>
     <string name = "cancel">Cancel</string>
+    <string name = "set_background_photo">Set Background Photo</string>
+    <string name = "new_collection">New Collection</string>
+    <string name = "new_collection_hint">Write a name for your new collection. You can Rename it later.</string>
+    <string name = "my_new_collection">My New Collection</string>
+    <string name = "add_new">Add New</string>
 </resources>
