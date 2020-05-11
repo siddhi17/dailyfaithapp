@@ -4,15 +4,16 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.dailyfaithapp.dailyfaith.Database.DatabaseHandler;
+import com.dailyfaithapp.dailyfaith.Model.Collections;
 
 import java.util.ArrayList;
 
 public class GetCollectionQuotesAsyncTask extends
                                           AsyncTask<String, Integer,
-                                                  ArrayList<String>> {
+                                                  ArrayList<Collections>> {
 
     DatabaseHandler dbConnector;
-    ArrayList<String> quotes = new ArrayList<>();
+    ArrayList<Collections> quotes = new ArrayList<>();
     GetCollectionQuotesCallBack
             getCollectionQuotesCallBack;
     private Context mContext;
@@ -29,7 +30,7 @@ public class GetCollectionQuotesAsyncTask extends
     }
 
     @Override
-    protected ArrayList<String> doInBackground(String... params) {
+    protected ArrayList<Collections> doInBackground(String... params) {
 
         if (dbConnector != null) {
 
@@ -44,7 +45,7 @@ public class GetCollectionQuotesAsyncTask extends
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> quotes) {
+    protected void onPostExecute(ArrayList<Collections> quotes) {
         if (quotes != null) {
             dbConnector.close();
 
@@ -54,6 +55,6 @@ public class GetCollectionQuotesAsyncTask extends
     }
 
     public interface GetCollectionQuotesCallBack {
-        void onPostExecute(ArrayList<String> quotesList);
+        void onPostExecute(ArrayList<Collections> quotesList);
     }
 }

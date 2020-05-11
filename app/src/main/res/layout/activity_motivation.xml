@@ -172,8 +172,8 @@
                     android:layout_height = "1dp"
                     android:layout_alignStart = "@+id/textView_search"
                     android:layout_alignLeft = "@+id/textView_search"
-                    android:layout_alignEnd = "@+id/imageView_search"
-                    android:layout_alignRight = "@+id/imageView_search"
+                    android:layout_alignEnd = "@+id/imageView_arrow1"
+                    android:layout_alignRight = "@+id/imageView_arrow1"
                     android:layout_alignParentBottom = "true"
                     android:background = "@color/light_white" />
 
@@ -233,8 +233,8 @@
                     android:layout_height = "1dp"
                     android:layout_alignStart = "@+id/textView_past_quotes"
                     android:layout_alignLeft = "@+id/textView_past_quotes"
-                    android:layout_alignEnd = "@+id/imageView_past_quotes"
-                    android:layout_alignRight = "@+id/imageView_past_quotes"
+                    android:layout_alignEnd = "@+id/imageView_arrow2"
+                    android:layout_alignRight = "@+id/imageView_arrow2"
                     android:layout_alignParentBottom = "true"
                     android:background = "@color/light_white" />
 
@@ -292,8 +292,8 @@
                     android:layout_height = "1dp"
                     android:layout_alignStart = "@+id/textView_favourites"
                     android:layout_alignLeft = "@+id/textView_favourites"
-                    android:layout_alignEnd = "@+id/imageView_favourites"
-                    android:layout_alignRight = "@+id/imageView_favourites"
+                    android:layout_alignEnd = "@+id/imageView_arrow3"
+                    android:layout_alignRight = "@+id/imageView_arrow3"
                     android:layout_alignParentBottom = "true"
                     android:background = "@color/light_white" />
 
@@ -368,8 +368,8 @@
                     android:layout_height = "1dp"
                     android:layout_alignStart = "@+id/textView_share"
                     android:layout_alignLeft = "@+id/textView_share"
-                    android:layout_alignEnd = "@+id/imageView_share"
-                    android:layout_alignRight = "@+id/imageView_share"
+                    android:layout_alignEnd = "@+id/imageView_arrow4"
+                    android:layout_alignRight = "@+id/imageView_arrow4"
                     android:layout_alignParentBottom = "true"
                     android:background = "@color/light_white" />
 
@@ -427,8 +427,8 @@
                     android:layout_height = "1dp"
                     android:layout_alignStart = "@+id/textView_follow_insta"
                     android:layout_alignLeft = "@+id/textView_follow_insta"
-                    android:layout_alignEnd = "@+id/imageView_follow_insta"
-                    android:layout_alignRight = "@+id/imageView_follow_insta"
+                    android:layout_alignEnd = "@+id/imageView_arrow5"
+                    android:layout_alignRight = "@+id/imageView_arrow5"
                     android:layout_alignParentBottom = "true"
                     android:background = "@color/light_white" />
 
@@ -486,8 +486,8 @@
                     android:layout_height = "1dp"
                     android:layout_alignStart = "@+id/textView_review"
                     android:layout_alignLeft = "@+id/textView_review"
-                    android:layout_alignEnd = "@+id/imageView_review"
-                    android:layout_alignRight = "@+id/imageView_review"
+                    android:layout_alignEnd = "@+id/imageView_arrow6"
+                    android:layout_alignRight = "@+id/imageView_arrow6"
                     android:layout_alignParentBottom = "true"
                     android:background = "@color/light_white" />
 
@@ -545,8 +545,8 @@
                     android:layout_height = "1dp"
                     android:layout_alignStart = "@+id/textView_help"
                     android:layout_alignLeft = "@+id/textView_help"
-                    android:layout_alignEnd = "@+id/imageView_help"
-                    android:layout_alignRight = "@+id/imageView_help"
+                    android:layout_alignEnd = "@+id/imageView_arrow7"
+                    android:layout_alignRight = "@+id/imageView_arrow7"
                     android:layout_alignParentBottom = "true"
                     android:background = "@color/light_white" />
 
@@ -604,8 +604,8 @@
                     android:layout_height = "1dp"
                     android:layout_alignStart = "@+id/textView_feedback"
                     android:layout_alignLeft = "@+id/textView_feedback"
-                    android:layout_alignEnd = "@+id/imageView_feedback"
-                    android:layout_alignRight = "@+id/imageView_feedback"
+                    android:layout_alignEnd = "@+id/imageView_arrow8"
+                    android:layout_alignRight = "@+id/imageView_arrow8"
                     android:layout_alignParentBottom = "true"
                     android:background = "@color/light_white" />
 

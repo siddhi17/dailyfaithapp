@@ -22,4 +22,15 @@
         app:layout_constraintStart_toStartOf = "parent"
         app:layout_constraintTop_toTopOf = "parent" />
 
+
+    <ImageView
+        android:id = "@+id/imageView_delete"
+        android:layout_width = "@dimen/margin_20"
+        android:layout_height = "@dimen/margin_20"
+        android:src = "@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintTop_toTopOf = "parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

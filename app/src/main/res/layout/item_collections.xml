@@ -32,9 +32,19 @@
         android:layout_marginEnd = "@dimen/margin_30"
         android:layout_marginRight = "@dimen/margin_30"
         android:fontFamily = "@font/open_sans_light"
-        android:text = "TextView"
+        android:text = "@string/_0_quotes"
         android:textColor = "@android:color/black"
         android:textSize = "@dimen/text_size_12"
         app:layout_constraintStart_toStartOf = "parent"
         app:layout_constraintTop_toBottomOf = "@+id/textView_quote" />
+
+    <ImageView
+        android:id = "@+id/imageView_delete"
+        android:layout_width = "@dimen/margin_20"
+        android:layout_height = "@dimen/margin_20"
+        android:src = "@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintTop_toTopOf = "parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

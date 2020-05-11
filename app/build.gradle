@@ -23,6 +23,7 @@ android {
 
     buildTypes {
         release {
+            testCoverageEnabled = true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -52,9 +53,11 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation "com.github.skydoves:balloon:1.1.5"
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
     implementation "androidx.room:room-runtime:$room_version"

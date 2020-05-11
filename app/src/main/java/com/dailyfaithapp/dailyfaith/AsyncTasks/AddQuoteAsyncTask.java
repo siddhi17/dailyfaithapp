@@ -13,15 +13,17 @@ public class AddQuoteAsyncTask extends
     DatabaseHandler dbConnector;
     AddQuoteCallBack addQuoteCallBack;
     private AppCompatActivity mContext;
+    private Boolean pastQuotes;
 
     public AddQuoteAsyncTask(
-            AppCompatActivity context, AddQuoteCallBack addQuoteCallBack
+            AppCompatActivity context, AddQuoteCallBack addQuoteCallBack,
+            Boolean pastQuotes
     ) {
 
         this.mContext = context;
         this.addQuoteCallBack = addQuoteCallBack;
         dbConnector = new DatabaseHandler(context);
-
+        this.pastQuotes = pastQuotes;
     }
 
     @Override
@@ -30,9 +32,12 @@ public class AddQuoteAsyncTask extends
         if (dbConnector != null) {
 
             Quotes quotes = new Quotes();
-            quotes.setQuote(params[0].getQuote());
-            quotes.setFavourite("0");
 
+            quotes.setQuote(params[0].getQuote());
+            quotes.setIsPastQuoteSaved("0");
+            quotes.setFavourite("0");
+            quotes.setCategory(params[0].getCategory());
+            quotes.setQuoteType(params[0].getQuoteType());
             dbConnector.addQuote(quotes);
 
             return true;
@@ -46,13 +51,13 @@ public class AddQuoteAsyncTask extends
     protected void onPostExecute(Boolean b) {
         if (b != null) {
             dbConnector.close();
-            addQuoteCallBack.onPostExecute(b);
+            addQuoteCallBack.onPostExecute(b, pastQuotes);
             return;
         }
     }
 
     public interface AddQuoteCallBack {
-        void onPostExecute(Boolean b);
+        void onPostExecute(Boolean b, Boolean pastQuotes);
     }
 
 }

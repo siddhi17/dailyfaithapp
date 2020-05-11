@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android = "http://schemas.android.com/apk/res/android"
+          xmlns:tools = "http://schemas.android.com/tools"
           package = "com.dailyfaithapp.dailyfaith">
 
     <uses-permission android:name = "android.permission.INTERNET" />
     <uses-permission android:name = "android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name = "android.permission.WAKE_LOCK" />
+    <uses-permission android:name = "android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name = "android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name = "android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name = "com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
 
     <application
+        android:name = ".MyApplication"
         android:allowBackup = "true"
         android:icon = "@drawable/ic_daily_faith_icon"
         android:label = "@string/app_name"
+        android:requestLegacyExternalStorage = "false"
         android:roundIcon = "@drawable/ic_daily_faith_icon"
         android:supportsRtl = "true"
-        android:theme = "@style/AppTheme">
-        <activity android:name = ".Activities.CollectionQuotesActivity"></activity>
+        android:theme = "@style/AppTheme"
+        tools:targetApi = "q">
+        <activity android:name = ".Activities.HomeScreenActivity">
+            <intent-filter>
+                <action android:name = "android.intent.action.MAIN" />
+
+                <category android:name = "android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name = ".Activities.CollectionQuotesActivity" />
         <activity android:name = ".Activities.ThemesActivity" />
         <activity android:name = ".Activities.FavouritesActivity" />
         <activity android:name = ".Activities.PastQuotesActivity" />
@@ -24,21 +41,34 @@
         <activity android:name = ".Activities.CategoryActivity" />
         <activity android:name = ".Activities.SelectionActivity">
 
+
         </activity>
         <activity android:name = ".Activities.UnlockActivity" />
         <activity android:name = ".Activities.LaunchReminderActivity" />
         <activity android:name = ".Activities.SplashActivity" />
         <activity android:name = ".Activities.MainActivity">
-            <intent-filter>
-                <action android:name = "android.intent.action.MAIN" />
 
-                <category android:name = "android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
+
 
         <meta-data
             android:name = "preloaded_fonts"
             android:resource = "@array/preloaded_fonts" />
+
+        <receiver
+            android:name = ".MyReceiver"
+            android:enabled = "true"
+            android:exported = "false"></receiver>
+        <receiver android:name = ".DeviceBootReceiver">
+            <intent-filter>
+                <action android:name = "android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name = ".MyNewIntentReceiver"
+            android:exported = "false"></service>
     </application>
 
 </manifest>

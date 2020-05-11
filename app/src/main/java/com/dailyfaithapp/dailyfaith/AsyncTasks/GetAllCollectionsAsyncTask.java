@@ -16,15 +16,17 @@ public class GetAllCollectionsAsyncTask extends
     List<Collections> collectionsArrayList = new ArrayList<>();
     GetAllCollectionsCallBack getAllCollectionsCallBack;
     private Context mContext;
+    int position;
 
     public GetAllCollectionsAsyncTask(
-            Context context, GetAllCollectionsCallBack getAllCollectionsCallBack
+            Context context,
+            GetAllCollectionsCallBack getAllCollectionsCallBack, int position
     ) {
 
         this.mContext = context;
         this.getAllCollectionsCallBack = getAllCollectionsCallBack;
         dbConnector = new DatabaseHandler(context);
-
+        this.position = position;
     }
 
     @Override
@@ -46,13 +48,14 @@ public class GetAllCollectionsAsyncTask extends
         if (collectionsArrayList != null) {
             dbConnector.close();
 
-            getAllCollectionsCallBack.onPostExecute(collectionsArrayList);
+            getAllCollectionsCallBack
+                    .onPostExecute(collectionsArrayList, position);
             return;
         }
     }
 
     public interface GetAllCollectionsCallBack {
-        void onPostExecute(List<Collections> quotesList);
+        void onPostExecute(List<Collections> quotesList, int position);
     }
 
 }
