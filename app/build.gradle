@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.dailyfaithapp.dailyfaith"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -59,6 +59,11 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.android.material:material:1.1.0-alpha09'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    implementation 'com.android.support:palette-v7:+'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.8.5'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.8.5'
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"

@@ -73,4 +73,5 @@
     <string name = "my_new_collection">My New Collection</string>
     <string name = "add_new">Add New</string>
     <string name = "_0_quotes">0 Quotes</string>
+    <string name = "select_all">Select All</string>
 </resources>

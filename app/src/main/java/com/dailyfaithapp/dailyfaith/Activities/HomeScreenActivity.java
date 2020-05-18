@@ -20,6 +20,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.dailyfaithapp.dailyfaith.Adapters.ViewPagerAdapter;
+import com.dailyfaithapp.dailyfaith.AsyncTasks.AddPastQuoteAsyncTask;
+import com.dailyfaithapp.dailyfaith.AsyncTasks.GetQuoteAsyncTask;
 import com.dailyfaithapp.dailyfaith.Helper.SharedPreferencesData;
 import com.dailyfaithapp.dailyfaith.Model.Quotes;
 import com.dailyfaithapp.dailyfaith.Model.Themes;
@@ -32,15 +34,20 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 public class HomeScreenActivity extends AppCompatActivity implements
-                                                          View.OnClickListener {
+                                                          View.OnClickListener,
+                                                          AddPastQuoteAsyncTask.AddPastQuoteCallBack,
+                                                          GetQuoteAsyncTask.GetQuoteCallBack {
 
     ViewPager2 viewPager;
     ArrayList<Quotes> quotesArrayList = new ArrayList<>();
+    public static Query next;
     ViewPagerAdapter adapter;
     RelativeLayout relativeLayoutCategory, relativeLayoutReminders,
             relativeLayoutMore, relativeLayoutThemes;
@@ -51,18 +58,21 @@ public class HomeScreenActivity extends AppCompatActivity implements
     ConstraintLayout constraintLayoutContainer;
     FirebaseFirestore db;
     SharedPreferencesData sharedPreferencesData;
-    Query next;
+    ArrayList<Quotes> categoryArrayList = new ArrayList<>();
     DocumentSnapshot lastVisible;
 
     ImageView imageViewCategory, imageViewReminders, imageViewThemes,
             imageViewMore;
-
+    String categoryType;
     int color;
     Boolean isDark;
     Boolean pastQuotes = false;
     Boolean categoryIsSet = false;
     String quoteType = "";
-
+    int mQuotePosition;
+    Quotes mQuote;
+    String json;
+    Gson gson = new Gson();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +94,9 @@ public class HomeScreenActivity extends AppCompatActivity implements
         db = FirebaseFirestore.getInstance();
 
         setUpUI();
-        setUpViewPager();
+        //  setUpViewPager();
 
-        fetchData();
+        //  fetchData();
 
     }
 
@@ -153,9 +163,13 @@ public class HomeScreenActivity extends AppCompatActivity implements
     }
 
     private ViewPagerAdapter createCardAdapter() {
+
         adapter = new ViewPagerAdapter(
-                HomeScreenActivity.this, quotesArrayList);
-        adapter.setItem(quotesArrayList);
+                HomeScreenActivity.this,
+                (((MyApplication) getApplicationContext()).myGlobalArray));
+        adapter.setItem(
+                (((MyApplication) getApplicationContext()).myGlobalArray));
+
         return adapter;
     }
 
@@ -177,13 +191,27 @@ public class HomeScreenActivity extends AppCompatActivity implements
                     @Override public void onPageSelected(int position) {
                         super.onPageSelected(position);
 
-                        if (!categoryIsSet) {
-                            if (position == quotesArrayList.size() - 1) {
+
+                        if (position ==
+                                (((MyApplication) getApplicationContext()).myGlobalArray)
+                                        .size() - 1) {
                                 fetchData();
                             }
-                        }
 
-                        Log.d("Position", String.valueOf(position));
+                        if ((((MyApplication) getApplicationContext()).myGlobalArray)
+                                .size() > 0) {
+                            mQuotePosition = position;
+                            mQuote
+                                    = (((MyApplication) getApplicationContext()).myGlobalArray)
+                                    .get(position);
+
+                            getQuote(
+                                    (((MyApplication) getApplicationContext()).myGlobalArray)
+                                            .get(mQuotePosition),
+                                    mQuotePosition
+                            );
+                            Log.d("Position", String.valueOf(position));
+                        }
 
                     }
 
@@ -195,13 +223,123 @@ public class HomeScreenActivity extends AppCompatActivity implements
 
     public void fetchData() {
 
+
         if (quoteType.equals("BibleVerses")) {
 
-            //    if(sharedPreferencesData.getStr("FirstTime").equals("true")) {
-            // Construct query for first 25 cities, ordered by population
-            Query first = db.collection("bible_verses")
-                    .limit(20);
-            first.get()
+            /*   if (sharedPreferencesData.getStr("FirstTime").equals("true")) {
+             */
+
+            if (next == null) {
+
+                Query first = db.collection("bible_verses")
+                        .limit(2);
+
+                first.get()
+                        .addOnSuccessListener(
+                                new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(
+                                            QuerySnapshot documentSnapshots
+                                    ) {
+                                        if (documentSnapshots.size() != 0) {
+                                            lastVisible
+                                                    = documentSnapshots
+                                                    .getDocuments()
+                                                    .get(documentSnapshots
+                                                            .size() - 1);
+                                        }
+
+                                        Log.d(
+                                                "Data",
+                                                documentSnapshots.getDocuments()
+                                                        .toString()
+                                        );
+
+
+                                        if (lastVisible != null) {
+                                            next = db.collection("bible_verses")
+                                                    .startAfter(lastVisible)
+                                                    .limit(2);
+                                        }
+
+                                        Log.d("docId", lastVisible.toString());
+
+                                        if (documentSnapshots.size() != 0) {
+
+                                            ((MyApplication) getApplicationContext()).myGlobalArray
+                                                    = new ArrayList<>();
+
+                                            for (QueryDocumentSnapshot doc : documentSnapshots) {
+                                                Quotes quotes = new Quotes();
+                                                if (doc.getId() != null) {
+                                                    quotes.setDocId(
+                                                            doc.getId());
+                                                }
+                                                if (doc.get("quote") != null) {
+                                                    quotes.setQuote(
+                                                            doc.getString(
+                                                                    "quote"));
+                                                }
+
+                                                if (categoryIsSet) {
+                                                    if (doc.get("category") !=
+                                                            null && doc.get(
+                                                            "category")
+                                                            .equals(categoryType)) {
+                                                        quotes.setCategory(
+                                                                doc.getString(
+                                                                        "category"));
+
+                                                        quotes.setFavourite(
+                                                                "0");
+                                                        quotes.setIsPastQuoteSaved(
+                                                                "0");
+                                                        (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                                .add(quotes);
+                                                    }
+
+                                                }
+                                                else {
+
+                                                    quotes.setFavourite("0");
+                                                    quotes.setIsPastQuoteSaved(
+                                                            "0");
+                                                    (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                            .add(quotes);
+                                                }
+                                            }
+
+                                     /*   for (DocumentSnapshot snapshot : documentSnapshots) {
+
+                                            quotesArrayList.add(snapshot
+                                                    .toObject(Quotes.class));
+                                        }*/
+
+                                            adapter.setItem(
+                                                    (((MyApplication) getApplicationContext()).myGlobalArray));
+
+                                        }
+                                        else {
+
+                                            Toast.makeText(
+                                                    HomeScreenActivity.this,
+                                                    "No more quotes",
+                                                    Toast.LENGTH_LONG
+                                            ).show();
+                                        }
+
+                                        sharedPreferencesData.setStr(
+                                                "FirstTime", "false");
+                                    }
+                                });
+            }
+        }
+
+        //     else {
+
+        if (next != null) {
+
+            next.get()
                     .addOnSuccessListener(
                             new OnSuccessListener<QuerySnapshot>() {
                                 @Override
@@ -209,148 +347,66 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                         QuerySnapshot documentSnapshots
                                 ) {
                                     if (documentSnapshots.size() != 0) {
-                                        lastVisible
-                                                = documentSnapshots
+                                        lastVisible = documentSnapshots
                                                 .getDocuments()
                                                 .get(documentSnapshots
                                                         .size() -
                                                         1);
                                     }
-
-                                    Log.d(
-                                            "Data",
-                                            documentSnapshots.getDocuments()
-                                                    .toString()
-                                    );
-
                                     if (lastVisible != null) {
-                                        next = db.collection("bible_verses")
+                                        next = db.collection(
+                                                "bible_verses")
                                                 .startAfter(lastVisible)
-                                                .limit(20);
+                                                .limit(2);
                                     }
 
                                     if (documentSnapshots.size() != 0) {
-                                        for (DocumentSnapshot snapshot : documentSnapshots) {
-                                            quotesArrayList.add(snapshot
-                                                    .toObject(
-                                                            Quotes.class));
-                                        }
-
-                                        adapter.setItem(quotesArrayList);
-
-                                    }
-                                    else {
-
-                                        Toast.makeText(
-                                                HomeScreenActivity.this,
-                                                "No more quotes",
-                                                Toast.LENGTH_LONG
-                                        ).show();
-                                    }
-
-                                    sharedPreferencesData.setStr(
-                                            "FirstTime", "false");
-                                }
-                            });
-
-        }
-          /*  else {
-
-                if (next != null) {
-
-                    next.get()
-                            .addOnSuccessListener(
-                                    new OnSuccessListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onSuccess(
-                                                QuerySnapshot documentSnapshots
-                                        ) {
-                                            if (documentSnapshots.size() != 0) {
-                                                lastVisible = documentSnapshots
-                                                        .getDocuments()
-                                                        .get(documentSnapshots
-                                                                .size() -
-                                                                1);
+                                        for (QueryDocumentSnapshot doc : documentSnapshots) {
+                                            Quotes quotes
+                                                    = new Quotes();
+                                            if (doc.getId() !=
+                                                    null) {
+                                                quotes.setDocId(
+                                                        doc.getId());
                                             }
-                                            if(lastVisible != null)
-                                                next = db.collection("bible_verses")
-                                                        .startAfter(lastVisible)
-                                                        .limit(20);
+                                            if (doc.get("quote") !=
+                                                    null) {
+                                                quotes.setQuote(
+                                                        doc.getString(
+                                                                "quote"));
+                                            }
+                                            if (categoryIsSet) {
+                                                if (doc.get(
+                                                        "category") !=
+                                                        null &&
+                                                        doc.get(
+                                                                "category")
+                                                                .equals(categoryType)) {
+                                                    quotes.setCategory(
+                                                            doc.getString(
+                                                                    "category"));
 
-                                            if (documentSnapshots.size() != 0) {
-                                                for (DocumentSnapshot snapshot : documentSnapshots) {
-
-                                                    quotesArrayList.add(snapshot
-                                                            .toObject(
-                                                                    Quotes.class));
-
+                                                    quotes.setFavourite(
+                                                            "0");
+                                                    quotes.setIsPastQuoteSaved(
+                                                            "0");
+                                                    (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                            .add(quotes);
                                                 }
-
-                                                adapter.setItem(quotesArrayList);
                                             }
                                             else {
 
-                                                Toast.makeText(
-                                                        HomeScreenActivity.this,
-                                                        "No more quotes",
-                                                        Toast.LENGTH_LONG
-                                                ).show();
-
+                                                quotes.setFavourite(
+                                                        "0");
+                                                quotes.setIsPastQuoteSaved(
+                                                        "0");
+                                                (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                        .add(quotes);
                                             }
-                                            Log.d(
-                                                    "Data",
-                                                    documentSnapshots
-                                                            .getDocuments()
-                                                            .toString()
-                                            );
-                                        }
-                                    });
-                }
-            }*/
-        //    }
-        else if (quoteType.equals("Prayers")) {
-            //  if(sharedPreferencesData.getStr("FirstTime").equals("true")) {
-            // Construct query for first 25 cities, ordered by population
-            Query first = db.collection("prayers")
-                    .limit(20);
-
-            first.get()
-                    .addOnSuccessListener(
-                            new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(
-                                        QuerySnapshot documentSnapshots
-                                ) {
-                                    if (documentSnapshots.size() != 0) {
-                                        lastVisible
-                                                = documentSnapshots
-                                                .getDocuments()
-                                                .get(documentSnapshots
-                                                        .size() -
-                                                        1);
-                                    }
-                                    Log.d(
-                                            "Data",
-                                            documentSnapshots.getDocuments()
-                                                    .toString()
-                                    );
-                                    if (lastVisible != null) {
-                                        next = db.collection("prayers")
-                                                .startAfter(lastVisible)
-                                                .limit(20);
-                                    }
-
-                                    if (documentSnapshots.size() != 0) {
-                                        for (DocumentSnapshot snapshot : documentSnapshots) {
-                                            quotesArrayList.add(snapshot
-                                                    .toObject(
-                                                            Quotes.class));
-
                                         }
 
-                                        adapter.setItem(quotesArrayList);
-
-
+                                        adapter.setItem(
+                                                ((MyApplication) getApplicationContext()).myGlobalArray);
                                     }
                                     else {
 
@@ -361,14 +417,131 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                         ).show();
 
                                     }
-
-                                    sharedPreferencesData.setStr(
-                                            "FirstTime", "false");
+                                    Log.d(
+                                            "Data",
+                                            documentSnapshots
+                                                    .getDocuments()
+                                                    .toString()
+                                    );
                                 }
                             });
-
         }
-        else {
+        //}
+        // }
+
+        else if (quoteType.equals("Prayers")) {
+
+            //   if (sharedPreferencesData.getStr("FirstTime").equals
+            //   ("true")) {
+
+            if (next == null) {
+
+                Query first = db.collection("prayers")
+                        .limit(2);
+
+                first.get()
+                        .addOnSuccessListener(
+                                new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(
+                                            QuerySnapshot documentSnapshots
+                                    ) {
+                                        if (documentSnapshots.size() != 0) {
+                                            lastVisible
+                                                    = documentSnapshots
+                                                    .getDocuments()
+                                                    .get(documentSnapshots
+                                                            .size() -
+                                                            1);
+                                        }
+                                        Log.d(
+                                                "Data",
+                                                documentSnapshots
+                                                        .getDocuments()
+                                                        .toString()
+                                        );
+                                        if (lastVisible != null) {
+                                            next = db.collection("prayers")
+                                                    .startAfter(lastVisible)
+                                                    .limit(2);
+                                        }
+
+                                        if (documentSnapshots.size() != 0) {
+                                     /*   for (DocumentSnapshot snapshot : documentSnapshots) {
+                                            quotesArrayList.add(snapshot
+                                                    .toObject(
+                                                            Quotes.class));
+
+                                        }*/
+                                            ((MyApplication) getApplicationContext()).myGlobalArray
+                                                    = new ArrayList<>();
+
+
+                                            for (QueryDocumentSnapshot doc : documentSnapshots) {
+                                                Quotes quotes
+                                                        = new Quotes();
+                                                if (doc.getId() != null) {
+                                                    quotes.setDocId(
+                                                            doc.getId());
+                                                }
+                                                if (doc.get("quote") !=
+                                                        null) {
+                                                    quotes.setQuote(
+                                                            doc.getString(
+                                                                    "quote"));
+                                                }
+                                                if (categoryIsSet) {
+                                                    if (doc.get(
+                                                            "category") !=
+                                                            null && doc.get(
+                                                            "category")
+                                                            .equals(categoryType)) {
+                                                        quotes.setCategory(
+                                                                doc.getString(
+                                                                        "category"));
+
+                                                        quotes.setFavourite(
+                                                                "0");
+                                                        quotes.setIsPastQuoteSaved(
+                                                                "0");
+                                                        (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                                .add(quotes);
+                                                    }
+
+                                                }
+                                                else {
+
+                                                    quotes.setFavourite(
+                                                            "0");
+                                                    quotes.setIsPastQuoteSaved(
+                                                            "0");
+                                                    (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                            .add(quotes);
+                                                }
+                                            }
+
+                                            adapter.setItem(
+                                                    (((MyApplication) getApplicationContext()).myGlobalArray));
+
+
+                                        }
+                                        else {
+
+                                            Toast.makeText(
+                                                    HomeScreenActivity.this,
+                                                    "No more quotes",
+                                                    Toast.LENGTH_LONG
+                                            ).show();
+
+                                        }
+
+                                        sharedPreferencesData.setStr(
+                                                "FirstTime", "false");
+                                    }
+                                });
+            }
+
+            //    else {
             if (next != null) {
                 next.get()
                         .addOnSuccessListener(
@@ -388,18 +561,57 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                         if (lastVisible != null) {
                                             next = db.collection("prayers")
                                                     .startAfter(lastVisible)
-                                                    .limit(20);
+                                                    .limit(2);
                                         }
 
                                         if (documentSnapshots.size() != 0) {
-                                            for (DocumentSnapshot snapshot : documentSnapshots) {
 
-                                                quotesArrayList.add(snapshot
-                                                        .toObject(
-                                                                Quotes.class));
+                                            for (QueryDocumentSnapshot doc : documentSnapshots) {
+                                                Quotes quotes
+                                                        = new Quotes();
+                                                if (doc.getId() !=
+                                                        null) {
+                                                    quotes.setDocId(
+                                                            doc.getId());
+                                                }
+                                                if (doc.get("quote") !=
+                                                        null) {
+                                                    quotes.setQuote(
+                                                            doc.getString(
+                                                                    "quote"));
+                                                }
+                                                if (categoryIsSet) {
+                                                    if (doc.get(
+                                                            "category") !=
+                                                            null &&
+                                                            doc.get(
+                                                                    "category")
+                                                                    .equals(categoryType)) {
+                                                        quotes.setCategory(
+                                                                doc.getString(
+                                                                        "category"));
+
+                                                        quotes.setFavourite(
+                                                                "0");
+                                                        quotes.setIsPastQuoteSaved(
+                                                                "0");
+                                                        (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                                .add(quotes);
+                                                    }
+                                                }
+                                                else {
+
+                                                    quotes.setFavourite(
+                                                            "0");
+                                                    quotes.setIsPastQuoteSaved(
+                                                            "0");
+                                                    (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                            .add(quotes);
+                                                }
                                             }
 
-                                            adapter.setItem(quotesArrayList);
+                                            adapter.setItem(
+                                                    (((MyApplication) getApplicationContext()).myGlobalArray));
 
                                         }
                                         else {
@@ -421,10 +633,7 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                     }
                                 });
             }
-
         }
-
-        //     }
     }
 
     @Override
@@ -476,7 +685,6 @@ public class HomeScreenActivity extends AppCompatActivity implements
 
         startActivity(new Intent(this, SelectionActivity.class).putExtra(
                 "isMainActivity", true));
-        categoryIsSet = true;
 
     }
 
@@ -494,12 +702,106 @@ public class HomeScreenActivity extends AppCompatActivity implements
 
     public void openThemesActivity() {
 
-        startActivity(new Intent(this, ThemesActivity.class));
+        startActivityForResult(new Intent(this, ThemesActivity.class), 3);
+    }
+
+    public void addPastQuote(Quotes quotes) {
+
+        AddPastQuoteAsyncTask addPastQuoteAsyncTask = new AddPastQuoteAsyncTask(
+                this,
+                this
+        );
+
+        addPastQuoteAsyncTask.execute(quotes.getQuote(), quotes.getDocId(),
+                String.valueOf(mQuotePosition)
+        );
+    }
+
+    public void getQuote(Quotes quotes, int position) {
+
+        GetQuoteAsyncTask getQuoteAsyncTask =
+                new GetQuoteAsyncTask(this, this);
+        getQuoteAsyncTask.execute(quotes.getDocId(), String.valueOf(position));
+
     }
 
     @Override
+    public void onPostExecute(Quotes quotes, int position) {
+
+        if (quotes != null) {
+
+            if (quotes.getDocId()
+                    .equals((((MyApplication) getApplicationContext()).myGlobalArray)
+                            .get(position).getDocId())) {
+                (((MyApplication) getApplicationContext()).myGlobalArray)
+                        .get(position)
+                        .setFavourite(quotes.getIsFavourite());
+                (((MyApplication) getApplicationContext()).myGlobalArray)
+                        .get(position)
+                        .setIsPastQuoteSaved(quotes.getIsPastQuoteSaved());
+
+                adapter.setItem(
+                        (((MyApplication) getApplicationContext()).myGlobalArray));
+            }
+
+        }
+        else {
+
+            if (quoteType.equals("BibleVerses")) {
+
+                if ((((MyApplication) getApplicationContext()).myGlobalArray)
+                        .get(position) != null &&
+                        (((MyApplication) getApplicationContext()).myGlobalArray)
+                                .get(position)
+                                .getIsPastQuoteSaved().equals("0")) {
+                    addPastQuote(
+                            (((MyApplication) getApplicationContext()).myGlobalArray)
+                                    .get(position));
+                }
+            }
+            else if (quoteType.equals("Prayers")) {
+                if ((((MyApplication) getApplicationContext()).myGlobalArray)
+                        .get(position) != null &&
+                        (((MyApplication) getApplicationContext()).myGlobalArray)
+                                .get(position)
+                                .getIsPastQuoteSaved().equals("0")) {
+                    addPastQuote(
+                            (((MyApplication) getApplicationContext()).myGlobalArray)
+                                    .get(position));
+                }
+            }
+
+        }
+
+    }
+
+
+    @Override
+    public void onPostExecute(Boolean b, int position) {
+
+        if (b) {
+
+            mQuotePosition = position;
+            (((MyApplication) getApplicationContext()).myGlobalArray)
+                    .get(position).setIsPastQuoteSaved("1");
+            adapter.setItem(
+                    (((MyApplication) getApplicationContext()).myGlobalArray));
+            Log.d(
+                    "past quote added", String.valueOf(
+                            (((MyApplication) getApplicationContext()).myGlobalArray)));
+
+        }
+    }
+    @Override
     public void onResume() {
         super.onResume();
+
+        categoryIsSet = sharedPreferencesData.getBool("categorySet", false);
+
+        categoryType = sharedPreferencesData.getStr("categoryType");
+
+        quoteType = sharedPreferencesData.getStr("QuoteType");
+
         sharedPreferencesData.setStr("selectedBottomMenu", "");
 
         if (sharedPreferencesData.getStr("selectedBottomMenu").equals("")) {
@@ -522,34 +824,18 @@ public class HomeScreenActivity extends AppCompatActivity implements
                             constraintLayoutContainer,
                             HomeScreenActivity.this
                     );
-
                 }
             });
         }
-     /*   if(quotesArrayList.size() == 0)
-        {
+
+        if ((((MyApplication) getApplicationContext()).myGlobalArray) != null
+                && (((MyApplication) getApplicationContext()).myGlobalArray)
+                .size() == 0) {
             fetchData();
-        }*/
-
-        if (categoryIsSet) {
-
-            quotesArrayList.clear();
-            quotesArrayList
-                    .addAll(((MyApplication) getApplicationContext()).myGlobalArray);
-            ((MyApplication) getApplicationContext()).myGlobalArray.clear();
-            adapter.setItem(quotesArrayList);
         }
 
+
+        setUpViewPager();
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                /*   quotesArrayList = data.getParcelableArrayListExtra("categoryList");*/
-
-                categoryIsSet = true;
-            }
-        }
-    }
 }

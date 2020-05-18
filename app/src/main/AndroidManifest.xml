@@ -16,7 +16,7 @@
         android:allowBackup = "true"
         android:icon = "@drawable/ic_daily_faith_icon"
         android:label = "@string/app_name"
-        android:requestLegacyExternalStorage = "false"
+        android:requestLegacyExternalStorage = "true"
         android:roundIcon = "@drawable/ic_daily_faith_icon"
         android:supportsRtl = "true"
         android:theme = "@style/AppTheme"
@@ -45,7 +45,10 @@
         </activity>
         <activity android:name = ".Activities.UnlockActivity" />
         <activity android:name = ".Activities.LaunchReminderActivity" />
-        <activity android:name = ".Activities.SplashActivity" />
+        <activity android:name = ".Activities.SplashActivity">
+
+
+        </activity>
         <activity android:name = ".Activities.MainActivity">
 
 
@@ -60,15 +63,18 @@
             android:name = ".MyReceiver"
             android:enabled = "true"
             android:exported = "false"></receiver>
+
+
         <receiver android:name = ".DeviceBootReceiver">
             <intent-filter>
                 <action android:name = "android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <service
+        <receiver
             android:name = ".MyNewIntentReceiver"
-            android:exported = "false"></service>
+            android:enabled = "true"
+            android:exported = "false" />
     </application>
 
 </manifest>

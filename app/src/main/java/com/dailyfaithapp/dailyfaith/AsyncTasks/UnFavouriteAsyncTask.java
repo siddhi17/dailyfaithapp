@@ -33,7 +33,7 @@ public class UnFavouriteAsyncTask extends
         if (dbConnector != null) {
 
             Quotes favourites = new Quotes();
-            favourites.setId(Integer.parseInt(params[0]));
+            favourites.setDocId(params[0]);
             favourites.setFavourite(params[1]);
 
             dbConnector.unFavourite(favourites);

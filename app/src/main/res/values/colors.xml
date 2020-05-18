@@ -44,5 +44,6 @@
     <color name = "Worry">#7EC6A1</color>
     <color name = "light_white">#ecf3ff</color>
     <color name = "light_grey">#f2f1f6</color>
+    <color name = "black">#000000</color>
 
 </resources>

@@ -37,6 +37,7 @@ public class AddQuoteInCollectionAsyncTask extends
             Collections collections = new Collections();
             collections.setId(Integer.parseInt(params[0]));
             collections.setCollection_msg(params[1]);
+            collections.setDocId(params[2]);
 
             dbConnector.addIntoCollection(collections);
 
