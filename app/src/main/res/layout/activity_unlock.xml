@@ -94,43 +94,43 @@
                 android:textSize = "14sp" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id = "@+id/relative_quotes"
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
-            android:layout_below = "@id/relative_trial"
-            android:layout_marginTop = "@dimen/margin_5">
+        <!--   <RelativeLayout
+               android:id = "@+id/relative_quotes"
+               android:layout_width = "match_parent"
+               android:layout_height = "wrap_content"
+               android:layout_below = "@id/relative_trial"
+               android:layout_marginTop = "@dimen/margin_5">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id = "@+id/imageView_quotes"
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:layout_centerVertical = "true"
-                android:layout_marginStart = "@dimen/margin_20"
-                android:layout_marginLeft = "@dimen/margin_20"
-                android:background = "@drawable/circle_background"
-                android:src = "@drawable/ic_tick" />
+               <androidx.appcompat.widget.AppCompatImageView
+                   android:id = "@+id/imageView_quotes"
+                   android:layout_width = "wrap_content"
+                   android:layout_height = "wrap_content"
+                   android:layout_centerVertical = "true"
+                   android:layout_marginStart = "@dimen/margin_20"
+                   android:layout_marginLeft = "@dimen/margin_20"
+                   android:background = "@drawable/circle_background"
+                   android:src = "@drawable/ic_tick" />
 
-            <TextView
-                android:id = "@+id/textView_quotes"
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:layout_centerVertical = "true"
-                android:layout_marginStart = "@dimen/margin_20"
-                android:layout_marginLeft = "@dimen/margin_20"
-                android:layout_toEndOf = "@id/imageView_quotes"
-                android:layout_toRightOf = "@id/imageView_quotes"
-                android:fontFamily = "@font/open_sans"
-                android:text = "@string/quotes_str"
-                android:textColor = "@android:color/black"
-                android:textSize = "14sp" />
-        </RelativeLayout>
+               <TextView
+                   android:id = "@+id/textView_quotes"
+                   android:layout_width = "wrap_content"
+                   android:layout_height = "wrap_content"
+                   android:layout_centerVertical = "true"
+                   android:layout_marginStart = "@dimen/margin_20"
+                   android:layout_marginLeft = "@dimen/margin_20"
+                   android:layout_toEndOf = "@id/imageView_quotes"
+                   android:layout_toRightOf = "@id/imageView_quotes"
+                   android:fontFamily = "@font/open_sans"
+                   android:text = "@string/quotes_str"
+                   android:textColor = "@android:color/black"
+                   android:textSize = "14sp" />
+           </RelativeLayout>-->
 
         <RelativeLayout
             android:id = "@+id/relative_categories"
             android:layout_width = "match_parent"
             android:layout_height = "wrap_content"
-            android:layout_below = "@id/relative_quotes"
+            android:layout_below = "@id/relative_trial"
             android:layout_marginTop = "@dimen/margin_5">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -221,38 +221,38 @@
                 android:textColor = "@android:color/black"
                 android:textSize = "14sp" />
         </RelativeLayout>
+        <!--
+                <RelativeLayout
+                    android:id = "@+id/relative_reminders"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_below = "@id/relative_adds"
+                    android:layout_marginTop = "@dimen/margin_5">
 
-        <RelativeLayout
-            android:id = "@+id/relative_reminders"
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
-            android:layout_below = "@id/relative_adds"
-            android:layout_marginTop = "@dimen/margin_5">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id = "@+id/imageView_reminders"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerVertical = "true"
+                        android:layout_marginStart = "@dimen/margin_20"
+                        android:layout_marginLeft = "@dimen/margin_20"
+                        android:background = "@drawable/circle_background"
+                        android:src = "@drawable/ic_tick" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id = "@+id/imageView_reminders"
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:layout_centerVertical = "true"
-                android:layout_marginStart = "@dimen/margin_20"
-                android:layout_marginLeft = "@dimen/margin_20"
-                android:background = "@drawable/circle_background"
-                android:src = "@drawable/ic_tick" />
-
-            <TextView
-                android:id = "@+id/textView_reminder"
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:layout_centerVertical = "true"
-                android:layout_marginStart = "@dimen/margin_20"
-                android:layout_marginLeft = "@dimen/margin_20"
-                android:layout_toEndOf = "@id/imageView_reminders"
-                android:layout_toRightOf = "@id/imageView_reminders"
-                android:fontFamily = "@font/open_sans"
-                android:text = "@string/reminders_str"
-                android:textColor = "@android:color/black"
-                android:textSize = "14sp" />
-        </RelativeLayout>
+                    <TextView
+                        android:id = "@+id/textView_reminder"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerVertical = "true"
+                        android:layout_marginStart = "@dimen/margin_20"
+                        android:layout_marginLeft = "@dimen/margin_20"
+                        android:layout_toEndOf = "@id/imageView_reminders"
+                        android:layout_toRightOf = "@id/imageView_reminders"
+                        android:fontFamily = "@font/open_sans"
+                        android:text = "@string/reminders_str"
+                        android:textColor = "@android:color/black"
+                        android:textSize = "14sp" />
+                </RelativeLayout>-->
 
     </RelativeLayout>
 

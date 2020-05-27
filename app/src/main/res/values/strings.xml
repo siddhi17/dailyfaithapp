@@ -1,27 +1,30 @@
 <resources>
     <string name = "app_name">Daily Faith</string>
-    <string name = "self_love">Self Love.</string>
-    <string name = "self_care">Self Care.</string>
-    <string name = "self_growth">Self Growth.</string>
+    <string name = "self_love">Hope</string>
+    <string name = "self_care">Faith</string>
+    <string name = "self_growth">Love</string>
     <string name = "get_started">Get Started</string>
-    <string name = "launch_reminder_quote">What you do today can improve all
-        your
-        tomorrows</string>
-    <string name = "ralf_marston">- Ralf Marston</string>
-    <string name = "motivation_reminder">Set daily Motivation reminders.</string>
+    <string name = "launch_reminder_quote">For God so loved the world that
+        He gave His only begotten Son, that whoever believes in Him should not
+        perish but have everlasting life.</string>
+    <string name = "ralf_marston"> - John 3:16</string>
+    <string name = "motivation_reminder">Set Daily Faith Reminders.</string>
     <string name = "how_many">How Many</string>
     <string name = "_10x">10X</string>
     <string name = "start_at">Start At</string>
     <string name = "end_at">End At</string>
     <string name = "continue_str">Continue</string>
-    <string name = "unlock_everything">Unlock Everything.</string>
-    <string name = "trial">3days Free Trial</string>
-    <string name = "categories_str">Categories for any situation</string>
-    <string name = "themes_str">Original themes, customizable</string>
-    <string name = "ads_str">No ads, no watermarks</string>
+    <string name = "unlock_everything">Remove Ads.</string>
+    <string name = "trial">7 days Free Trial</string>
+    <string name = "categories_str"><!--Categories for any situation-->
+        Support Daily Faith App
+    </string>
+    <string name = "ads_str">Ads Free <!--No ads, no watermarks--></string>
+    <string name = "themes_str"><!--Original themes, customizable-->Save
+        Time</string>
     <string name = "reminders_str">Full reminders to change your mindset</string>
     <string name = "premium_str">Try premium for free.</string>
-    <string name = "offer_str">3 days free, then just ₹ 1699.00/ year</string>
+    <string name = "offer_str">3 days free, then just $7.00 / year </string>
     <string name = "restore">Restore</string>
     <string name = "privacy_policy">Privacy Policy</string>
     <string name = "terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
@@ -47,7 +50,7 @@
     <string name = "follow_us_on_instagram">Follow us on Instagram</string>
     <string name = "leave_us_a_review">Leave us a Review</string>
     <string name = "help">Help</string>
-    <string name = "give_us_a_feedback">Give us a Feedback</string>
+    <string name = "give_us_a_feedback">Give us Feedback</string>
     <string name = "more">More</string>
     <string name = "image_save">Image Save</string>
     <string name = "instagram">Instagram</string>
@@ -57,7 +60,7 @@
     <string name = "no_collections">You Don\'t have any collections Yet.</string>
     <string name = "collections_desc">Collections group quotes you save together. Like \'quote that you cheer me up\' or \'stop procastinating\'.</string>
     <string name = "create_collection">Create Collection</string>
-    <string name = "reminder_msg">Setting daily reminders will help you stay motivated and think positive</string>
+    <string name = "reminder_msg">Set daily reminders to help you live everyday in faith</string>
     <string name = "swipe_instruction">Swipe to read quotes</string>
     <string name = "got_it">Got it!</string>
     <string name = "favourites">Favorites</string>
@@ -67,11 +70,15 @@
     <string name = "author_optional">Author(Optional)</string>
     <string name = "save">Save</string>
     <string name = "cancel">Cancel</string>
-    <string name = "set_background_photo">Set Background Photo</string>
+    <string name = "set_background_photo">Customize Theme</string>
     <string name = "new_collection">New Collection</string>
     <string name = "new_collection_hint">Write a name for your new collection. You can Rename it later.</string>
     <string name = "my_new_collection">My New Collection</string>
     <string name = "add_new">Add New</string>
     <string name = "_0_quotes">0 Quotes</string>
     <string name = "select_all">Select All</string>
+    <string name = "default_notification_channel_id">alarm_channel_id_01</string>
+    <string name = "copy_clipboard">Copied to clipboard.</string>
+    <string name = "share_using">"Share using"</string>
+    <string name = "you_don_t_have_any_favorites_yet">You Don\'t have any Favorites Yet.</string>
 </resources>

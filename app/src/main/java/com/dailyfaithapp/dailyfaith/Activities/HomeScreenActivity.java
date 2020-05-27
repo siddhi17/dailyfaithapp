@@ -29,6 +29,12 @@ import com.dailyfaithapp.dailyfaith.MyApplication;
 import com.dailyfaithapp.dailyfaith.R;
 import com.dailyfaithapp.dailyfaith.Utils.Utils;
 import com.dailyfaithapp.dailyfaith.Views.PopUpClass;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -45,10 +51,10 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                                           AddPastQuoteAsyncTask.AddPastQuoteCallBack,
                                                           GetQuoteAsyncTask.GetQuoteCallBack {
 
-    ViewPager2 viewPager;
+    public static ViewPager2 viewPager;
     ArrayList<Quotes> quotesArrayList = new ArrayList<>();
     public static Query next;
-    ViewPagerAdapter adapter;
+    public static ViewPagerAdapter adapter;
     RelativeLayout relativeLayoutCategory, relativeLayoutReminders,
             relativeLayoutMore, relativeLayoutThemes;
 
@@ -73,12 +79,30 @@ public class HomeScreenActivity extends AppCompatActivity implements
     Quotes mQuote;
     String json;
     Gson gson = new Gson();
+    Boolean repeatData = false;
+    Boolean mNotificationQuote = false;
+    int mPositionCounter = 10;
+    private Intent mIntent;
+    private InterstitialAd interstitial;
+    private boolean adClosed = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         sharedPreferencesData =
                 new SharedPreferencesData(getApplicationContext());
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(
+                    InitializationStatus initializationStatus
+            ) {
+            }
+        });
+
+
+        mIntent = getIntent();
 
         setDefaultTheme();
 
@@ -94,13 +118,64 @@ public class HomeScreenActivity extends AppCompatActivity implements
         db = FirebaseFirestore.getInstance();
 
         setUpUI();
-        //  setUpViewPager();
+
+        setUpViewPager();
 
         //  fetchData();
 
     }
 
     private void setUpUI() {
+
+
+        AdRequest adIRequest = new AdRequest.Builder().build();
+
+        // Prepare the Interstitial Ad Activity
+        interstitial = new InterstitialAd(HomeScreenActivity.this);
+
+        // Insert the Ad Unit ID
+        interstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        // Interstitial Ad load Request
+        interstitial.loadAd(adIRequest);
+
+
+        interstitial.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+
+                Log.d("AdFailedToLoad", String.valueOf(errorCode));
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when the ad is displayed.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the interstitial ad is closed.
+                interstitial.loadAd(new AdRequest.Builder().build());
+                adClosed = true;
+            }
+        });
+
 
         quoteType = sharedPreferencesData.getStr("QuoteType");
 
@@ -126,6 +201,15 @@ public class HomeScreenActivity extends AppCompatActivity implements
 
     }
 
+    public void displayInterstitial() {
+        // If Interstitial Ads are loaded then show else show nothing.
+        if (interstitial.isLoaded()) {
+            interstitial.show();
+        }
+        else {
+            Log.d("TAG", "The ad wasn't loaded.");
+        }
+    }
     public void setDefaultTheme() {
 
         if (sharedPreferencesData.getStr("FirstTime").equals("true")) {
@@ -139,6 +223,9 @@ public class HomeScreenActivity extends AppCompatActivity implements
             Drawable img = Utils.getDrawable(this, R.drawable.theme0);
 
             Bitmap anImage = ((BitmapDrawable) img).getBitmap();
+            themes.setImageBitmap(anImage);
+            ((MyApplication) getApplicationContext()).mBitmap =
+                    anImage;
             color = Utils.getDominantColor(anImage);
             Log.d("Bitmap", anImage.toString());
             isDark = Utils.isColorDark(color);
@@ -192,11 +279,31 @@ public class HomeScreenActivity extends AppCompatActivity implements
                         super.onPageSelected(position);
 
 
+                        if (position == mPositionCounter) {
+
+                            displayInterstitial();
+                            mPositionCounter = mPositionCounter + 10;
+                        }
+
                         if (position ==
                                 (((MyApplication) getApplicationContext()).myGlobalArray)
                                         .size() - 1) {
+
+                            if (Utils.isNetworkAvailable(
+                                    HomeScreenActivity.this))
                                 fetchData();
+                            else {
+                                Toast.makeText(
+                                        HomeScreenActivity.this,
+                                        "Could" +
+                                                " not connect to internet. Please try" +
+                                                " again later.",
+                                        Toast.LENGTH_LONG
+                                ).show();
                             }
+
+                        }
+
 
                         if ((((MyApplication) getApplicationContext()).myGlobalArray)
                                 .size() > 0) {
@@ -266,8 +373,14 @@ public class HomeScreenActivity extends AppCompatActivity implements
 
                                         if (documentSnapshots.size() != 0) {
 
-                                            ((MyApplication) getApplicationContext()).myGlobalArray
-                                                    = new ArrayList<>();
+                                            if ((!repeatData ||
+                                                    !mNotificationQuote) &&
+                                                    ((MyApplication) getApplicationContext()).myGlobalArray
+                                                            .size() == 0) {
+
+                                                ((MyApplication) getApplicationContext()).myGlobalArray
+                                                        = new ArrayList<>();
+                                            }
 
                                             for (QueryDocumentSnapshot doc : documentSnapshots) {
                                                 Quotes quotes = new Quotes();
@@ -309,27 +422,18 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                                 }
                                             }
 
-                                     /*   for (DocumentSnapshot snapshot : documentSnapshots) {
-
-                                            quotesArrayList.add(snapshot
-                                                    .toObject(Quotes.class));
-                                        }*/
-
                                             adapter.setItem(
                                                     (((MyApplication) getApplicationContext()).myGlobalArray));
 
                                         }
                                         else {
 
-                                            Toast.makeText(
-                                                    HomeScreenActivity.this,
-                                                    "No more quotes",
-                                                    Toast.LENGTH_LONG
-                                            ).show();
+
                                         }
 
                                         sharedPreferencesData.setStr(
                                                 "FirstTime", "false");
+                                        mNotificationQuote = false;
                                     }
                                 });
             }
@@ -410,11 +514,22 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                     }
                                     else {
 
-                                        Toast.makeText(
-                                                HomeScreenActivity.this,
-                                                "No more quotes",
-                                                Toast.LENGTH_LONG
-                                        ).show();
+                                        repeatData = true;
+                                        next = null;
+
+                                        if (Utils.isNetworkAvailable(
+                                                HomeScreenActivity.this)) {
+                                            fetchData();
+                                        }
+                                        else {
+                                            Toast.makeText(
+                                                    HomeScreenActivity.this,
+                                                    "Could" +
+                                                            " not connect to internet. Please try" +
+                                                            " again later.",
+                                                    Toast.LENGTH_LONG
+                                            ).show();
+                                        }
 
                                     }
                                     Log.d(
@@ -473,8 +588,14 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                                             Quotes.class));
 
                                         }*/
-                                            ((MyApplication) getApplicationContext()).myGlobalArray
-                                                    = new ArrayList<>();
+                                            if ((!repeatData ||
+                                                    !mNotificationQuote) &&
+                                                    ((MyApplication) getApplicationContext()).myGlobalArray
+                                                            .size() == 0) {
+
+                                                ((MyApplication) getApplicationContext()).myGlobalArray
+                                                        = new ArrayList<>();
+                                            }
 
 
                                             for (QueryDocumentSnapshot doc : documentSnapshots) {
@@ -527,16 +648,11 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                         }
                                         else {
 
-                                            Toast.makeText(
-                                                    HomeScreenActivity.this,
-                                                    "No more quotes",
-                                                    Toast.LENGTH_LONG
-                                            ).show();
-
                                         }
 
                                         sharedPreferencesData.setStr(
                                                 "FirstTime", "false");
+                                        mNotificationQuote = false;
                                     }
                                 });
             }
@@ -616,11 +732,24 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                         }
                                         else {
 
-                                            Toast.makeText(
-                                                    HomeScreenActivity.this,
-                                                    "No more quotes",
-                                                    Toast.LENGTH_LONG
-                                            ).show();
+                                            repeatData = true;
+
+                                            next = null;
+
+                                            if (Utils.isNetworkAvailable(
+                                                    HomeScreenActivity.this)) {
+                                                fetchData();
+                                            }
+                                            else {
+                                                Toast.makeText(
+                                                        HomeScreenActivity.this,
+                                                        "Could" +
+                                                                " not connect to internet. Please try" +
+                                                                " again later.",
+                                                        Toast.LENGTH_LONG
+                                                )
+                                                        .show();
+                                            }
 
                                         }
                                         Log.d(
@@ -828,14 +957,67 @@ public class HomeScreenActivity extends AppCompatActivity implements
             });
         }
 
-        if ((((MyApplication) getApplicationContext()).myGlobalArray) != null
-                && (((MyApplication) getApplicationContext()).myGlobalArray)
-                .size() == 0) {
-            fetchData();
+        if (mIntent.getStringExtra("notificationQuote") != null) {
+
+            if (!mIntent.getStringExtra("notificationQuote").equals("")) {
+                Quotes quotes = new Quotes();
+                quotes.setFavourite(
+                        "0");
+                quotes.setIsPastQuoteSaved(
+                        "0");
+                quotes.setDocId(mIntent.getStringExtra(
+                        "notifyQuoteId"));
+                quotes.setQuote(mIntent.getStringExtra(
+                        "notificationQuote"));
+                (((MyApplication) getApplicationContext()).myGlobalArray)
+                        .add(0, quotes);
+                mNotificationQuote = true;
+            }
         }
 
 
-        setUpViewPager();
+        if ((((MyApplication) getApplicationContext()).myGlobalArray) != null
+                && (((MyApplication) getApplicationContext()).myGlobalArray)
+                .size() == 0) {
+
+            if (Utils.isNetworkAvailable(HomeScreenActivity.this)) {
+                fetchData();
+            }
+            else {
+                Toast.makeText(HomeScreenActivity.this, "Could" +
+                        " not connect to internet. Please try" +
+                        " again later.", Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
+        if (categoryIsSet) {
+            setUpViewPager();
+        }
+
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Log.d(
+                "onBackPressed",
+                String.valueOf(
+                        ((MyApplication) getApplicationContext()).myGlobalArray
+                                .size())
+        );
+
+        if (viewPager.getCurrentItem() == 0) {
+            super.onBackPressed();
+        }
+        else {
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+        }
+
+        adClosed = false;
+    }
+
 
 }

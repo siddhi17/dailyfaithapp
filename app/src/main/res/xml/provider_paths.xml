@@ -3,5 +3,5 @@
 <paths>
     <external-path
         name = "external_files"
-        path = "images/" />
+        path = "/" />
 </paths>

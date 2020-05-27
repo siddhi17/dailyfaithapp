@@ -10,6 +10,7 @@
     <uses-permission android:name = "android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name = "android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name = "com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
+    <uses-permission android:name = "android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name = ".MyApplication"
@@ -21,60 +22,61 @@
         android:supportsRtl = "true"
         android:theme = "@style/AppTheme"
         tools:targetApi = "q">
-        <activity android:name = ".Activities.HomeScreenActivity">
+
+
+        <activity android:name = "$Activities.Splash2Activity" />
+
+        <meta-data
+            android:name = "com.google.android.gms.ads.APPLICATION_ID"
+            android:value = "ca-app-pub-9420813155077757~5771850327" />
+
+        <activity
+            android:name = "$Activities.HomeScreenActivity"
+            android:screenOrientation = "fullSensor" />
+        <activity android:name = "$Activities.CollectionQuotesActivity" />
+        <activity android:name = "$Activities.ThemesActivity" />
+        <activity android:name = "$Activities.FavouritesActivity" />
+        <activity android:name = "$Activities.PastQuotesActivity" />
+        <activity
+            android:name = "$Activities.CollectionsActivity"
+            android:windowSoftInputMode = "adjustResize" />
+        <activity android:name = "$Activities.MotivationActivity" />
+        <activity android:name = "$Activities.RemindersActivity" />
+        <activity android:name = "$Activities.CategoryActivity" />
+        <activity android:name = "$Activities.SelectionActivity" />
+        <activity android:name = "$Activities.UnlockActivity" />
+        <activity android:name = "$Activities.LaunchReminderActivity" />
+        <activity android:name = "$Activities.SplashActivity">
             <intent-filter>
                 <action android:name = "android.intent.action.MAIN" />
 
                 <category android:name = "android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name = ".Activities.CollectionQuotesActivity" />
-        <activity android:name = ".Activities.ThemesActivity" />
-        <activity android:name = ".Activities.FavouritesActivity" />
-        <activity android:name = ".Activities.PastQuotesActivity" />
-        <activity
-            android:name = ".Activities.CollectionsActivity"
-            android:windowSoftInputMode = "adjustResize" />
-        <activity android:name = ".Activities.MotivationActivity" />
-        <activity android:name = ".Activities.RemindersActivity" />
-        <activity android:name = ".Activities.CategoryActivity" />
-        <activity android:name = ".Activities.SelectionActivity">
-
-
-        </activity>
-        <activity android:name = ".Activities.UnlockActivity" />
-        <activity android:name = ".Activities.LaunchReminderActivity" />
-        <activity android:name = ".Activities.SplashActivity">
-
-
-        </activity>
-        <activity android:name = ".Activities.MainActivity">
-
-
-        </activity>
-
+        <activity android:name = "$Activities.MainActivity" />
 
         <meta-data
             android:name = "preloaded_fonts"
             android:resource = "@array/preloaded_fonts" />
 
         <receiver
-            android:name = ".MyReceiver"
+            android:name = ".MyNewIntentReceiver"
             android:enabled = "true"
-            android:exported = "false"></receiver>
-
-
-        <receiver android:name = ".DeviceBootReceiver">
+            android:exported = "true">
             <intent-filter>
                 <action android:name = "android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <receiver
-            android:name = ".MyNewIntentReceiver"
-            android:enabled = "true"
-            android:exported = "false" />
+        <provider
+            android:name = "androidx.core.content.FileProvider"
+            android:authorities = "${applicationId}.provider"
+            android:exported = "false"
+            android:grantUriPermissions = "true">
+            <meta-data
+                android:name = "android.support.FILE_PROVIDER_PATHS"
+                android:resource = "@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

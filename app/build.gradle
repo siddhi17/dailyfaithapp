@@ -57,7 +57,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.android.material:material:1.1.0-alpha09'
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
     implementation 'com.android.support:palette-v7:+'
 
@@ -67,6 +67,8 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    implementation 'com.google.android.gms:play-services-ads:19.1.0'
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"

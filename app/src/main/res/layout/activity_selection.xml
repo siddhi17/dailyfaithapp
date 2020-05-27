@@ -36,7 +36,7 @@
 
         <RelativeLayout
             android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
+            android:layout_height = "@dimen/margin_60"
             android:layout_alignParentRight = "true"
             android:layout_centerVertical = "true"
             android:layout_marginStart = "40dp"
@@ -47,7 +47,7 @@
             android:layout_marginBottom = "@dimen/margin_20"
             android:layout_toEndOf = "@+id/textView_start_at"
             android:layout_toRightOf = "@+id/textView_start_at"
-            android:background = "@drawable/layout_border"
+            android:background = "@drawable/layout_border_blue"
             android:paddingLeft = "10dp"
             android:paddingRight = "10dp"
             android:paddingBottom = "@dimen/margin_5">
@@ -60,6 +60,7 @@
                 android:fontFamily = "@font/open_sans"
                 android:gravity = "center_horizontal"
                 android:text = "@string/bible_verses"
+                android:textStyle = "bold"
                 android:textAlignment = "center"
                 android:textColor = "@android:color/black"
                 android:textSize = "16sp" />
@@ -84,7 +85,7 @@
 
         <RelativeLayout
             android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
+            android:layout_height = "@dimen/margin_60"
             android:layout_alignParentRight = "true"
             android:layout_centerVertical = "true"
             android:layout_marginStart = "40dp"
@@ -95,7 +96,7 @@
             android:layout_marginBottom = "@dimen/margin_20"
             android:layout_toEndOf = "@+id/textView_start_at"
             android:layout_toRightOf = "@+id/textView_start_at"
-            android:background = "@drawable/layout_border"
+            android:background = "@drawable/layout_border_green"
             android:paddingLeft = "10dp"
             android:paddingRight = "10dp"
             android:paddingBottom = "@dimen/margin_5">
@@ -108,6 +109,7 @@
                 android:fontFamily = "@font/open_sans"
                 android:gravity = "center_horizontal"
                 android:text = "@string/prayers"
+                android:textStyle = "bold"
                 android:textAlignment = "center"
                 android:textColor = "@android:color/black"
                 android:textSize = "16sp" />

@@ -327,29 +327,40 @@
                 android:textColor = "@android:color/black"
                 android:textSize = "@dimen/text_size_14" />
 
-            <TextView
-                android:id = "@+id/textView_quote_value"
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:layout_centerVertical = "true"
-                android:layout_marginEnd = "@dimen/margin_20"
-                android:layout_marginRight = "@dimen/margin_20"
-                android:layout_toStartOf = "@id/imageView_arrow"
-                android:layout_toLeftOf = "@id/imageView_arrow"
-                android:fontFamily = "@font/open_sans"
-                android:text = "Bible Verses"
-                android:textColor = "@android:color/black" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id = "@+id/imageView_arrow"
-                android:layout_width = "wrap_content"
+            <RelativeLayout
+                android:id = "@+id/relative_quote"
+                android:layout_width = "@dimen/margin_200"
                 android:layout_height = "wrap_content"
-                android:layout_alignParentEnd = "true"
                 android:layout_alignParentRight = "true"
                 android:layout_centerVertical = "true"
                 android:layout_marginEnd = "@dimen/margin_20"
-                android:layout_marginRight = "@dimen/margin_20"
-                android:src = "@drawable/mdtp_ic_chevron_right_black_24dp" />
+                android:layout_marginRight = "@dimen/margin_20">
+
+
+                <TextView
+                    android:id = "@+id/textView_quote_value"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_toStartOf = "@+id/imageView_arrow"
+                    android:fontFamily = "@font/open_sans"
+                    android:textColor = "@android:color/black" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id = "@+id/imageView_arrow"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerVertical = "true"
+                    android:layout_marginEnd = "@dimen/margin_20"
+                    android:layout_marginRight = "@dimen/margin_20"
+                    android:src = "@drawable/mdtp_ic_chevron_right_black_24dp" />
+
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 

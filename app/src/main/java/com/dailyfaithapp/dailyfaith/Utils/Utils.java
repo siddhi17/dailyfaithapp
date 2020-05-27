@@ -1,5 +1,6 @@
 package com.dailyfaithapp.dailyfaith.Utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,36 +15,43 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.exifinterface.media.ExifInterface;
+import androidx.multidex.BuildConfig;
 
+import com.dailyfaithapp.dailyfaith.Model.Quotes;
 import com.dailyfaithapp.dailyfaith.MyNewIntentReceiver;
-import com.dailyfaithapp.dailyfaith.MyReceiver;
 import com.dailyfaithapp.dailyfaith.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class Utils {
-
-    private static final int NOTIFICATION_REMINDER = 100;
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(
@@ -135,9 +143,7 @@ public class Utils {
         }
         try {
             FileOutputStream fos = new FileOutputStream(pictureFile);
-/*            image =
-                    compressImage(new File(getFileDir(context),
-                            pictureFile.getName()).getAbsolutePath());*/
+
             image.compress(Bitmap.CompressFormat.JPEG, 100, fos);
 
             fos.close();
@@ -220,76 +226,240 @@ public class Utils {
         return dominantColor;
     }
 
-    public static List<String> setAlarmTimeList(
-            String startTime, String endTime,
-            int howMany
+    public static List<Date> setAlarmTimeList(
+            String startTime, String endTime, int howMany
     ) {
-
-        List<String> times = new ArrayList<>();
+        List<Date> times = new ArrayList<>();
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat(
+                    "HH:mm", Locale.ENGLISH);
             Date start = dateFormat.parse(startTime);
             Date end = dateFormat.parse(endTime);
             long minutes = ((end.getTime() - start.getTime()) / 1000 / 60) /
-                    howMany;
+                    (howMany - 1);
+            Calendar calobj;
             for (int i = 0; i < howMany; i++) {
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(start);
-                cal.add(Calendar.MINUTE, (int) (i * minutes));
-                String time = dateFormat.format(cal.getTime());
-                times.add(time);
+
+                calobj = Calendar.getInstance();
+                calobj.set(
+                        Calendar.HOUR_OF_DAY,
+                        Integer.valueOf(dateFormat.format(start).split(":")[0])
+                );
+                calobj.set(
+                        Calendar.MINUTE,
+                        Integer.valueOf(dateFormat.format(start).split(":")[1])
+                );
+                calobj.add(Calendar.MINUTE, (int) (i * minutes));
+                calobj.set(Calendar.SECOND, 0);
+                times.add(calobj.getTime());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
         Log.d("timesList", times.toString());
         return times;
     }
 
+
     public static void showNotification(
-            List<String> timeList, Context context,
-            String quote
+            List<Date> timeList, Context context,
+            List<Quotes> quotesList
     ) {
 
-        Intent notifyIntent = new Intent(context, MyNewIntentReceiver.class);
+        for (Date date : timeList) {
+            Intent notifyIntent = new Intent(
+                    context, MyNewIntentReceiver.class);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
-                notifyIntent, PendingIntent.FLAG_ONE_SHOT
-        );
+            notifyIntent
+                    .putExtra("title", context.getString(R.string.app_name));
 
-        notifyIntent.putExtra("title", context.getString(R.string.app_name));
+            final int random = new Random().nextInt();
+            notifyIntent.putExtra("notify_id", random);
 
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
+            if (quotesList.size() > 0) {
 
-        for (String time : timeList) {
-            notifyIntent.putExtra("notify_id", timeList.get(time.length()));
+                final int randomQuote = new Random().nextInt(quotesList.size());
 
-            notifyIntent.putExtra(
-                    "quote",
-                    quote
+                Quotes quotes = new Quotes();
+                quotes = quotesList.get(randomQuote);
+
+                notifyIntent.putExtra(
+                        "quote",
+                        quotes.getQuote()
+                );
+
+
+                notifyIntent.putExtra("notifyQuoteId", quotes.getDocId());
+
+            }
+
+            int randomInt = new Random().nextInt(1000);
+
+            notifyIntent.putExtra("requestCode", randomInt);
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+                    randomInt,
+                    notifyIntent, PendingIntent.FLAG_ONE_SHOT
+
             );
-            alarmManager
-                    .setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                            Long.parseLong(timeList.get(0)),
-                            Long.parseLong(time),
-                            pendingIntent
-                    );
+
+            AlarmManager alarmManager = (AlarmManager) context
+                    .getSystemService(Context.ALARM_SERVICE);
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setInexactRepeating
+                        (AlarmManager.RTC_WAKEUP,
+                                date.getTime(), AlarmManager.INTERVAL_DAY,
+                                pendingIntent
+                        );
+            }
+            else {
+                alarmManager.setRepeating
+                        (AlarmManager.RTC_WAKEUP,
+                                date.getTime(), AlarmManager.INTERVAL_DAY,
+                                pendingIntent
+                        );
+            }
+
         }
+
+        Toast.makeText(context, "Notification is set.", Toast.LENGTH_LONG)
+                .show();
 
         Log.d("notificationIntentSet", "Utils, pending intent set");
     }
 
-    public void stopAlarm(Context context) {
-        Intent intent = new Intent(context, MyReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1,
-                intent, 0
+    public static Bitmap loadBitmapFromView(View v) {
+
+        Bitmap b = Bitmap.createBitmap(v.getWidth(), v.getHeight(),
+                Bitmap.Config.ARGB_8888
         );
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(alarmIntent);
+
+        View namebar = v.findViewById(R.id.include2);
+        namebar.setVisibility(View.GONE);
+
+        Bitmap mutableBitmap = b.copy(Bitmap.Config.ARGB_8888, true);
+
+        Canvas c = new Canvas(b);
+        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+        v.draw(c);
+        namebar.setVisibility(View.VISIBLE);
+        return b;
+    }
+
+    @SuppressLint("LongLogTag")
+    public static File createShareImage(View relativeLayout, Context context) {
+
+        Bitmap bitmap = loadBitmapFromView(relativeLayout);
+        //   File dir = new File("/sdcard/saved_images");
+
+        File dir = new File(
+                "/sdcard/DailyFaith");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm")
+                .format(new Date());
+        String mImageName = "MI_" + timeStamp + ".jpg";
+
+        File file = new File(dir, mImageName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+        } catch (Exception e) {
+            Log.e("ExpressionEditImageActivity", "Error, " + e);
+        }
+
+        return file;
+    }
+
+    public static boolean checkDate(String startTime, String endTime) {
+        Date startDate, endDate;
+        boolean isGreater = false;
+        try {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm",
+                    Locale.ENGLISH);
+
+            startDate = sdf.parse(startTime);
+            endDate = sdf.parse(endTime);
+
+            Calendar calobjStartDate, calobjectEndDate;
+
+            calobjStartDate = Calendar.getInstance();
+            calobjStartDate.set(
+                    Calendar.HOUR_OF_DAY,
+                    Integer.valueOf(sdf.format(startDate).split(":")[0])
+            );
+            calobjStartDate.set(
+                    Calendar.MINUTE,
+                    Integer.valueOf(sdf.format(startDate).split(":")[1])
+            );
+            calobjStartDate.set(Calendar.SECOND, 0);
+
+            calobjectEndDate = Calendar.getInstance();
+            calobjectEndDate.set(
+                    Calendar.HOUR_OF_DAY,
+                    Integer.valueOf(sdf.format(endDate).split(":")[0])
+            );
+            calobjectEndDate.set(
+                    Calendar.MINUTE,
+                    Integer.valueOf(sdf.format(endDate).split(":")[1])
+            );
+            calobjectEndDate.set(Calendar.SECOND, 0);
+
+            if (System.currentTimeMillis() <
+                    calobjStartDate.getTimeInMillis()) {
+
+                if (calobjectEndDate.before(calobjStartDate)) {
+                    // method also.
+                    isGreater = false;
+                }
+                else {
+                    isGreater = true;
+                }
+            }
+            else {
+                isGreater = false;
+            }
+        } catch (ParseException e) {
+            e.toString();
+
+        }
+        ;
+
+        return isGreater;
+    }
+
+    public static void messageText(String quote, Context context) {
+
+        /*Create an ACTION_SEND Intent*/
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        /*This will be the actual content you wish you share.*/
+        String shareBody = quote;
+        /*The type of the content is text, obviously.*/
+        intent.setType("text/plain");
+        /*Applying information Subject and Body.*/
+        intent.putExtra(
+                android.content.Intent.EXTRA_SUBJECT,
+                context.getString(R.string.app_name)
+        );
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        /*Fire!*/
+        context.startActivity(Intent.createChooser(
+                intent,
+                context.getString(R.string.share_using)
+        ));
+    }
+
+    public static void openUrl(String url, Context context) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        context.startActivity(browserIntent);
     }
 
     public static int calculateInSampleSize(
@@ -418,5 +588,59 @@ public class Utils {
         return scaledBitmap;
 
     }
+
+
+    public static void createInstagramIntent(
+            String type, String mediaPath,
+            Context context
+    ) {
+
+        // Create the new Intent using the 'Send' action.
+        Intent share = new Intent(Intent.ACTION_SEND);
+
+        // Set the MIME type
+        share.setType(type);
+
+        // Create the URI from the media
+        File media = new File(mediaPath);
+        Uri uri;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+            Log.d("FilePath", media.getPath());
+            uri = FileProvider.getUriForFile(
+                    context,
+                    BuildConfig.APPLICATION_ID + ".provider",
+                    media
+            );
+            share.setPackage("com.instagram.android");
+            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            // Add the URI to the Intent.
+            share.putExtra(Intent.EXTRA_STREAM, uri);
+
+        }
+        else {
+
+            uri = Uri.fromFile(media);
+
+            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            share.setPackage("com.instagram.android");
+            // Add the URI to the Intent.
+            share.putExtra(Intent.EXTRA_STREAM, uri);
+        }
+        // Broadcast the Intent.
+        context.startActivity(share);
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context
+                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        NetworkInfo activeNetworkInfo = connectivityManager
+                .getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 
 }
