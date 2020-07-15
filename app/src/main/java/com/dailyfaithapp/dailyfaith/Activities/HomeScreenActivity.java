@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -35,6 +36,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -354,22 +356,25 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                                     .getDocuments()
                                                     .get(documentSnapshots
                                                             .size() - 1);
+
+                                            Log.d(
+                                                    "Data",
+                                                    documentSnapshots.getDocuments()
+                                                            .toString()
+                                            );
+
                                         }
 
-                                        Log.d(
-                                                "Data",
-                                                documentSnapshots.getDocuments()
-                                                        .toString()
-                                        );
 
 
                                         if (lastVisible != null) {
                                             next = db.collection("bible_verses")
                                                     .startAfter(lastVisible)
                                                     .limit(2);
-                                        }
 
-                                        Log.d("docId", lastVisible.toString());
+                                            Log.d("docId", lastVisible.toString());
+
+                                        }
 
                                         if (documentSnapshots.size() != 0) {
 
@@ -426,16 +431,22 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                                     (((MyApplication) getApplicationContext()).myGlobalArray));
 
                                         }
-                                        else {
 
-
-                                        }
 
                                         sharedPreferencesData.setStr(
                                                 "FirstTime", "false");
                                         mNotificationQuote = false;
                                     }
-                                });
+                                }).addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d("Task Failed", e.getMessage());
+                            }
+                        });
+
+
+
             }
         }
 
@@ -721,8 +732,10 @@ public class HomeScreenActivity extends AppCompatActivity implements
                                                             "0");
                                                     quotes.setIsPastQuoteSaved(
                                                             "0");
-                                                    (((MyApplication) getApplicationContext()).myGlobalArray)
-                                                            .add(quotes);
+                                               /*     (((MyApplication) getApplicationContext()).myGlobalArray)
+                                                            .add(quotes);*/
+
+                                                    addInList(quotes);
                                                 }
                                             }
 
@@ -1019,5 +1032,14 @@ public class HomeScreenActivity extends AppCompatActivity implements
         adClosed = false;
     }
 
+
+    public void addInList(Quotes quotes)
+    {
+        quotesArrayList = new ArrayList();
+        quotesArrayList.add(quotes);  //add item or modify list
+
+        ((MyApplication) getApplicationContext()).myGlobalArray = quotesArrayList;
+        adapter.notifyDataSetChanged();
+    }
 
 }

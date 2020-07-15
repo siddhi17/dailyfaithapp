@@ -118,6 +118,7 @@
 
     </RelativeLayout>
 
+<!--
     <Button
         android:id = "@+id/button"
         style = "?android:attr/borderlessButtonStyle"
@@ -138,5 +139,6 @@
         app:layout_constraintRight_toRightOf = "parent"
         app:layout_constraintStart_toStartOf = "parent"
         app:layout_constraintTop_toBottomOf = "@+id/relative_prayers" />
+-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

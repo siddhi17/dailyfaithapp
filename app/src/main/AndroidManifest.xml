@@ -1,81 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android = "http://schemas.android.com/apk/res/android"
-          xmlns:tools = "http://schemas.android.com/tools"
-          package = "com.dailyfaithapp.dailyfaith">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dailyfaithapp.dailyfaith">
 
-    <uses-permission android:name = "android.permission.INTERNET" />
-    <uses-permission android:name = "android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name = "android.permission.WAKE_LOCK" />
-    <uses-permission android:name = "android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name = "android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name = "android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name = "com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
-    <uses-permission android:name = "android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name = ".MyApplication"
-        android:allowBackup = "true"
-        android:icon = "@drawable/ic_daily_faith_icon"
-        android:label = "@string/app_name"
-        android:requestLegacyExternalStorage = "true"
-        android:roundIcon = "@drawable/ic_daily_faith_icon"
-        android:supportsRtl = "true"
-        android:theme = "@style/AppTheme"
-        tools:targetApi = "q">
+        android:name=".MyApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_daily_faith_icon"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/ic_daily_faith_icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup"
+        tools:targetApi="q">
+        <activity android:name=".Activities.SearchActivity">
 
-
-        <activity android:name = "$Activities.Splash2Activity" />
+        </activity>
+        <activity
+            android:name=".Activities.Splash2Activity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
 
         <meta-data
-            android:name = "com.google.android.gms.ads.APPLICATION_ID"
-            android:value = "ca-app-pub-9420813155077757~5771850327" />
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9420813155077757~5771850327" />
 
         <activity
-            android:name = "$Activities.HomeScreenActivity"
-            android:screenOrientation = "fullSensor" />
-        <activity android:name = "$Activities.CollectionQuotesActivity" />
-        <activity android:name = "$Activities.ThemesActivity" />
-        <activity android:name = "$Activities.FavouritesActivity" />
-        <activity android:name = "$Activities.PastQuotesActivity" />
+            android:name=".Activities.HomeScreenActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
-            android:name = "$Activities.CollectionsActivity"
-            android:windowSoftInputMode = "adjustResize" />
-        <activity android:name = "$Activities.MotivationActivity" />
-        <activity android:name = "$Activities.RemindersActivity" />
-        <activity android:name = "$Activities.CategoryActivity" />
-        <activity android:name = "$Activities.SelectionActivity" />
-        <activity android:name = "$Activities.UnlockActivity" />
-        <activity android:name = "$Activities.LaunchReminderActivity" />
-        <activity android:name = "$Activities.SplashActivity">
+            android:name=".Activities.CollectionQuotesActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ThemesActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.FavouritesActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.PastQuotesActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.CollectionsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activities.MotivationActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.RemindersActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.CategoryActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SelectionActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.UnlockActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.LaunchReminderActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SplashActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+
             <intent-filter>
-                <action android:name = "android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name = "android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name = "$Activities.MainActivity" />
+        <activity
+            android:name=".Activities.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
 
         <meta-data
-            android:name = "preloaded_fonts"
-            android:resource = "@array/preloaded_fonts" />
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <receiver
-            android:name = ".MyNewIntentReceiver"
-            android:enabled = "true"
-            android:exported = "true">
+            android:name=".MyNewIntentReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name = "android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <provider
-            android:name = "androidx.core.content.FileProvider"
-            android:authorities = "${applicationId}.provider"
-            android:exported = "false"
-            android:grantUriPermissions = "true">
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
-                android:name = "android.support.FILE_PROVIDER_PATHS"
-                android:resource = "@xml/provider_paths" />
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

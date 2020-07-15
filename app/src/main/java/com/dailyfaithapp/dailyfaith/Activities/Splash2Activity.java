@@ -25,8 +25,9 @@ public class Splash2Activity extends AppCompatActivity {
                 )
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                                 Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
             }
-        }, 3000);
+        }, 2000);
 
     }
 }

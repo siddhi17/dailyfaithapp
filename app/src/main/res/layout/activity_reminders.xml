@@ -121,12 +121,11 @@
                 android:layout_width = "wrap_content"
                 android:layout_height = "wrap_content"
                 android:layout_centerVertical = "true"
-                android:layout_marginStart = "40dp"
-                android:layout_marginLeft = "40dp"
-                android:layout_toEndOf = "@id/imageView_minus"
-                android:layout_toRightOf = "@id/imageView_minus"
+                android:layout_toEndOf="@id/imageView_minus"
+                android:layout_toStartOf="@id/imageView_plus"
                 android:fontFamily = "@font/open_sans"
                 android:text = "@string/_10x"
+                android:textAlignment="center"
                 android:textColor = "@android:color/black" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -134,10 +133,8 @@
                 android:layout_width = "wrap_content"
                 android:layout_height = "wrap_content"
                 android:layout_centerVertical = "true"
-                android:layout_marginStart = "40dp"
-                android:layout_marginLeft = "40dp"
-                android:layout_toEndOf = "@id/textView_count"
-                android:layout_toRightOf = "@id/textView_count"
+                android:layout_marginEnd = "16dp"
+                android:layout_alignParentEnd="true"
                 android:background = "@drawable/layout_border"
                 android:src = "@drawable/ic_plus" />
 

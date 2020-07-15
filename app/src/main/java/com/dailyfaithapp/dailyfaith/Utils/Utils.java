@@ -16,7 +16,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -47,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -108,28 +108,30 @@ public class Utils {
     }
 
     public static File getOutputMediaFile(Context context) {
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-        File mediaStorageDir = new File(
-                Environment.getExternalStorageDirectory()
-                        + "/Android/data/"
-                        + context.getApplicationContext().getPackageName()
-                        + "/Files");
+            // To be safe, you should check that the SDCard is mounted
+            // using Environment.getExternalStorageState() before doing this.
+            File mediaStorageDir = new File(
+                    Environment.getExternalStorageDirectory()
+                            + "/Android/"
+                            + context.getApplicationContext().getPackageName()
+                            + "/Files");
 
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
+            // This location works best if you want the created images to be shared
+            // between applications and persist after your app has been uninstalled.
 
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            mediaStorageDir.mkdirs();
-        }
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm")
-                .format(new Date());
-        File mediaFile;
-        String mImageName = "MI_" + timeStamp + ".jpg";
-        mediaFile = new File(
-                mediaStorageDir.getPath() + File.separator + mImageName);
+            // Create the storage directory if it does not exist
+            if (!mediaStorageDir.exists()) {
+                mediaStorageDir.mkdirs();
+            }
+            // Create a media file name
+            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm")
+                    .format(new Date());
+            File mediaFile;
+            String mImageName = "MI_" + timeStamp + ".jpg";
+            mediaFile = new File(
+                    mediaStorageDir.getPath() + File.separator + mImageName);
+
+
         return mediaFile;
     }
 
@@ -608,11 +610,14 @@ public class Utils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
             Log.d("FilePath", media.getPath());
-            uri = FileProvider.getUriForFile(
+          /*  uri = FileProvider.getUriForFile(
                     context,
                     BuildConfig.APPLICATION_ID + ".provider",
                     media
-            );
+            );*/
+            uri = FileProvider.getUriForFile(
+                    Objects.requireNonNull(context),
+                    BuildConfig.APPLICATION_ID + ".provider", media);
             share.setPackage("com.instagram.android");
             share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             // Add the URI to the Intent.
@@ -633,14 +638,33 @@ public class Utils {
     }
 
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager =
+     /*   ConnectivityManager connectivityManager =
                 (ConnectivityManager) context
                         .getSystemService(Context.CONNECTIVITY_SERVICE);
         assert connectivityManager != null;
         NetworkInfo activeNetworkInfo = connectivityManager
                 .getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+*/
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+//For 3G check
+        boolean is3g = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+                .isConnectedOrConnecting();
+//For WiFi Check
+        boolean isWifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+                .isConnectedOrConnecting();
+
+        System.out.println(is3g + " net " + isWifi);
+
+        if (!is3g && !isWifi)
+        {
+            Toast.makeText(context,"Please make sure your Network Connection is ON ",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
-
-
 }
